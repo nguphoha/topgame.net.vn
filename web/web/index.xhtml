@@ -1,0 +1,41 @@
+<ui:composition template="master-page-web.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite/topgame/component">
+    
+    
+    <ui:define name="content">        
+        <!--        Danh sách game HOT nhất-->
+        <c:if test="#{typeView eq 'hot-nhat' or empty typeView}">
+            <cc:games games="#{homeController.gamesHOT}" 
+                      linkMore="${request.contextPath}/game-hot-nhat.html"
+                      title="GAME HOT NHẤT"
+                      paginations="#{homeController.paginations}"/>
+
+        </c:if>
+        <!--        Danh sách game mới nhất-->
+        <c:if test="#{typeView eq 'moi-nhat' or empty typeView}">
+            <cc:games games="#{homeController.gamesNewest}" 
+                      linkMore="${request.contextPath}/game-moi-nhat.html"
+                      title="GAME MỚI NHẤT"
+                      paginations="#{homeController.paginations}"/>
+        </c:if>
+        
+        <!--        Danh sách game xem nhiều nhất-->
+        <c:if test="#{typeView eq 'xem-nhieu' or empty typeView}">
+            <cc:games games="#{homeController.gamesMostView}" 
+                      linkMore="${request.contextPath}/game-xem-nhieu.html"
+                      title="GAME XEM NHIỀU"
+                      paginations="#{homeController.paginations}"/>    
+        </c:if>
+        
+        <!--        Danh sách game tải nhiều nhất-->
+        <c:if test="#{typeView eq 'tai-nhieu' or empty typeView}">
+            <cc:games games="#{homeController.gamesMostDownload}" 
+                      linkMore="${request.contextPath}/game-tai-nhieu.html"
+                      title="GAME TẢI NHIỀU"
+                      paginations="#{homeController.paginations}"/>    
+        </c:if>
+    </ui:define>             
+</ui:composition>

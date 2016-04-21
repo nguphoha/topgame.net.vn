@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="title" />
+        <cc:attribute name="games" required="true"/>
+        <cc:attribute name="linkMore"/>
+        <cc:attribute name="paginations"/>
+        <cc:attribute name="showPaging"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form id="formListGame">  
+            <div class="GAMEHOT_bg">
+                
+                <div class="GAMEHOT_title">
+                   #{cc.attrs.title}
+                  </div>
+                <div class="GAMEHOT_title_bg">
+                    <div class="GAMEHOT_title_bg_red"></div>
+                </div>
+                <div class="GameHOT">
+                    <ul>
+                        <c:forEach var="game" items="#{cc.attrs.games}">
+                            <li>
+                                <div class="GameHOT_box">
+                                    <a href="${request.contextPath}/chi-tiet-game-#{game.code}.html?id=#{game.id}"><img src="${resourceImage}/top-game-hotgame-img-1.png"/></a>
+                                    <div class="GameHOT_box_text">
+                                        <a href="${request.contextPath}/chi-tiet-game-#{game.code}.html?id=#{game.id}">#{game.name}</a>
+                                        <p><a href="${request.contextPath}/chuyen-muc-#{game.categoryCode}.html">#{game.categoryName}</a></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                    <div class="both"></div>
+                </div>
+                <c:choose>
+                    <c:when test="${empty param.typeView and empty cc.attrs.showPaging}">
+                        <div class="GameHOT_button">
+                            <button class="GameHOT_button_form">
+                                <a href="#{cc.attrs.linkMore}?action=view-more">XEM THÊM</a>
+                            </button>
+                        </div>
+                    </c:when>
+                    <c:otherwise>                    
+                        <div class="SoTrang">
+                            <c:forEach var="pagination" items="#{cc.attrs.paginations}">
+                                <a href="#{cc.attrs.linkMore}?action=view-more&amp;p=#{pagination.value}" class="SoTrang_#{pagination.style}">#{pagination.label}</a>
+                            </c:forEach>
+
+                        </div>
+                    </c:otherwise>
+
+                </c:choose>
+            </div>
+            
+        </h:form>
+    </cc:implementation>
+</html>

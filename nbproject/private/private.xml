@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/cache/CategoryCache.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/CategoryController.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/entities/DownloadHistory.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/wap/game/index.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/cache/management/CacheFactory.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/web/search.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/dao/DownloadHistoryDAO.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/util/Encrypter.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/web/master-page-web.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/web/index.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/WEB-INF/pretty-config.xml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/wap/search.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/resources/css/wap_style.css</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/dao/GameDAO.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/router/ExpertRouter.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/util/DateUtil.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/router/IndexRouter.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/cache/GameCache.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/resources/topgame/component/games-wap.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/wap/master-page-wap.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/web/category/index.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/wap/category/index.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/cache/SeoCache.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/entities/ContentRequest.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/BaseController.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/resources/topgame/component/games.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/wap/login/index.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/dao/AccountDao.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/SearchController.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/dao/SeoDao.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/web/game/index.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/entities/File.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/resources/css/web_style.css</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/test/NewClass.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/HomeController.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/router/CategoryRouter.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/entities/Category.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/MasterPageController.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/LoginController.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/wap/profile/index.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/web/login/index.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/wap/index.xhtml</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/entities/Game.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/ProfileController.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/src/java/inet/controller/GameController.java</file>
+            <file>file:/E:/Workspace/Own/Project/topgame/web/web/profile/index.xhtml</file>
+        </group>
+    </open-files>
+</project-private>

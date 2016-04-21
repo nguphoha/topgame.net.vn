@@ -1,0 +1,82 @@
+<ui:composition template="../master-page-wap.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:define name="content">
+        <div  class="PageChitiet_bg">
+            
+            <div class="Pages_chitiet_link">
+                <a href="${request.contextPath}/trang-chu.html">Trang chủ</a>  /  
+                <a href="${request.contextPath}/chuyen-muc-#{gameController.game.categoryCode}.html">#{gameController.game.categoryName}</a>   
+                /  #{gameController.game.name}
+            </div>
+            <div class="PageChitiet_content">
+                <div class="PageChitiet_content_img">
+                    <img src="${resourceImage}/top-game-chitietgame-img-1.png" width="89" height="89"/>
+                </div>
+                <div class="PageChitiet_content_text">
+                    <p>#{gameController.game.name}</p>
+                    <strong>Thể loại:</strong> #{gameController.game.categoryName}<br />
+                    <strong>Lượt xem:</strong> #{gameController.game.viewCount} <br />
+                    <strong>Giá:</strong> 2000<br />
+                    
+                </div>
+                <div class="both"></div>
+                <h:form>                    
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.ACCOUNT}">
+                            <h:commandButton value="Tải game" styleClass="PageChitiet_button"
+                                             actionListener="#{gameController.processDownloadGame(gameController.downloadUrl)}"/>
+                        </c:when>
+                        <c:otherwise>                        
+                            <button class="PageChitiet_button">
+                                Đăng ký để tải
+                            </button>
+                            (bằng 3g Viettel)
+                        </c:otherwise>
+                    </c:choose>
+                </h:form>
+                
+            </div>
+        </div><!-- End Pages_chitiet_link -->
+        
+        <div class="Pages_chitiet_MOTA">
+            
+            <div class="GAMEHOT_title">
+                MÔ TẢ:
+            </div>
+            <div class="Page_chitiet_Mota_TEXT">
+                #{gameController.game.description}
+            </div>
+        </div>
+        
+        <div class="GAMEHOT_bg">
+            
+            <div class="GAMEHOT_title">
+                    LIÊN QUAN:
+                </div>
+            <div class="GAMEHOT_title_bg">
+                    <div class="GAMEHOT_title_bg_red"></div>
+                </div>
+            <div class="GameHOT">
+                <ul>
+                    <c:forEach var="game" items="#{gameController.gamesRelative}">
+                        <li>
+                            <div class="GameHOT_box">
+                                <a href="${request.contextPath}/chi-tiet-game-#{game.code}.html?id=#{game.id}"><img src="${resourceImage}/top-game-hotgame-img-1.png"/></a>
+                                <div class="GameHOT_box_text">
+                                    <a href="${request.contextPath}/chi-tiet-game-#{game.code}.html?id=#{game.id}">#{game.name}</a>
+                                    <p><a href="${request.contextPath}/chuyen-muc-#{game.categoryCode}.html">#{game.categoryName}</a></p>
+                                </div>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

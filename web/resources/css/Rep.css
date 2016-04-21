@@ -1,0 +1,94 @@
+@charset "utf-8";
+/* CSS Document */
+@media screen and (max-width: 1100px) {
+	.TOPMIENPHI_List ul li{
+		border-bottom:1px solid#d6d6d6;
+		padding:8px 0 8px 0;
+		font-family: 'Roboto', sans-serif;
+	}
+	.GameHOT ul li{
+		width:15.66%;
+		float:left;
+		margin:0 1% 2% 0;
+	}
+	/*
+	.GameHOT ul li{
+	width:18.4%;
+	float:left;
+	margin:0 2% 2% 0;
+	}
+	.GameHOT ul li:nth-child(5){
+		margin-right:0;
+	}
+	.GameHOT ul li:nth-child(11){
+		margin-right:0;
+	}
+	.GameHOT ul li:nth-child(17){
+		margin-right:0;
+	}
+	.GameHOT ul li:nth-child(23){
+		margin-right:0;
+	}
+	.GameHOT ul li:nth-child(29){
+		margin-right:0;
+	}
+	.GameHOT ul li:nth-child(6){
+		display:none;
+	}
+	.GameHOT ul li:nth-child(12){
+		display:none
+	}
+	.GameHOT ul li:nth-child(6){
+		display:none;
+	}
+	.GameHOT ul li:nth-child(12){
+		display:none
+	}
+	
+	.GAMEMOINHAT_List ul li{
+		width:31.33%;
+		float:left;
+		margin:0 3% 0 0;
+	}
+	.GAMEMOINHAT_List ul li:nth-child(4){
+		display:none;
+	}
+	.GAMEMOINHAT_List ul li:nth-child(3){
+		margin-right:0;
+	}
+	*/
+	.Main_left{
+		width:74%;
+		float:left;
+		margin:0 1% 0 0;
+	}
+	.Main_right{
+		width:25%;
+		float:left;
+	}
+	.GameHOT_box img{
+		max-width:100% !important;
+    	height:auto;
+    	display:block;	
+	}
+	.Header{
+		max-width:1260px;
+		position:relative;
+		text-align:center;	
+		padding:15px 0 0 0;
+		margin:0 10px 0 10px;
+	}
+	.Menu{
+		max-width:1260px;
+		height:40px;
+		position:relative;
+		text-align:left;
+		margin:0 10px 0 10px;
+	}
+	.Main{
+		max-width:1260px;
+		text-align:left;
+		margin:20px 10px 20px 10px;
+	}
+}
+

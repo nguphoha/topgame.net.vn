@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite/topgame/component">
+
+    <h:body>
+        <ui:composition template="../master-page-web.xhtml">
+            <ui:define name="content">
+                <c:if test="#{not empty profileController.account}">
+                    <div class="Account_bg">
+                        <div class="Account_img">
+                            <img src="${request.contextPath}/resources/images/top-game-avatar.jpg" />
+                        </div>
+                        <div class="Accont_text">
+                            <strong>Số điện thoại:</strong> #{profileController.account.mobile}<br />
+                            <strong>Ngày đăng ký:</strong> #{profileController.account.dateCreateString}<br />
+                            <strong>Mật khẩu:</strong> #{profileController.account.password}
+                        </div>
+                        <div class="both"></div>
+                    </div>
+
+                    <cc:games games="#{profileController.gamesDownloaded}" 
+                              showPaging="true"
+                              title="GAME ĐÃ TẢI"
+                              paginations="#{profileController.paginations}"/>
+
+                </c:if>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
