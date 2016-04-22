@@ -15,13 +15,39 @@
 
         </c:if>
         <!--        Danh sách game mới nhất-->
-        <c:if test="#{typeView eq 'moi-nhat' or empty typeView}">
+        <c:if test="#{typeView eq 'moi-nhat'}">
             <cc:games games="#{homeController.gamesNewest}" 
                       linkMore="${request.contextPath}/game-moi-nhat.html"
                       title="GAME MỚI NHẤT"
                       paginations="#{homeController.paginations}"/>
         </c:if>
-        
+        <c:if test="#{empty typeView}">
+            <div class="GAMEMOINHAT_BG">
+                <div class="GAMEMOINHAT_title">
+                	MỚI NHẤT
+                    <div class="GAMEMOINHAT_title_xemtatca">
+                    	<a href="${request.contextPath}/game-moi-nhat.html?action=view-more">Xem tất cả >></a>
+                    </div>
+                </div>
+                 <div class="GAMEMOINHAT_title_bg">
+                	<div class="GAMEMOINHAT_title_bg_red"></div>
+                </div>
+                 <div class="GAMEMOINHAT_List">
+                     <ul>
+                         <c:forEach var="game" items="#{homeController.gamesNewest}">
+                             <li>
+                                 <img src="${request.contextPath}/resources/images/top-game-gamemoinhat-img-1.jpg"/>
+                                <div class="GAMEMOINHAT_List_text">
+                                    <a href="">#{game.name}</a>
+                                    <p><a href="#">#{game.categoryName}</a></p>
+                                </div>
+                            </li>
+                         </c:forEach>
+                     </ul>
+                     <div class="both"></div>
+                 </div>
+            </div>
+        </c:if>
         <!--        Danh sách game xem nhiều nhất-->
         <c:if test="#{typeView eq 'xem-nhieu' or empty typeView}">
             <cc:games games="#{homeController.gamesMostView}" 

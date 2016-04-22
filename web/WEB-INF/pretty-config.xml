@@ -3,6 +3,11 @@
                xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.3
                http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.3.xsd">
         
+    <url-mapping id="chi-tiet-game">
+        <pattern value="/#{/[a-zA-Z-]+/gameCode}-#{/[0-9]+/id}.html"/>
+        <view-id value="#{gameRouter.routing}" />
+    </url-mapping>
+    
     <url-mapping id="trang-chu">
         <pattern value="/trang-chu.html"/>
         <view-id value="#{indexRouter.routing}" /> 
@@ -23,10 +28,7 @@
         <view-id value="#{indexRouter.routing}" />
     </url-mapping>   
                
-    <url-mapping id="chi-tiet-game">
-        <pattern value="/chi-tiet-game-#{/[a-zA-Z-]+/gameCode}.html"/>
-        <view-id value="#{gameRouter.routing}" />
-    </url-mapping>              
+                  
     
     <url-mapping id="dang-nhap">
         <pattern value="/dang-nhap.html"/>

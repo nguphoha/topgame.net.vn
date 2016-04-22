@@ -5,11 +5,9 @@
  */
 package inet.dao;
 
-import com.ocpsoft.pretty.faces.util.StringUtils;
 import inet.common.database.dao.AbstractDAO;
 import inet.common.database.dao.RowMapper;
 import inet.constant.Constant;
-import inet.entities.Category;
 import inet.entities.Game;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,8 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

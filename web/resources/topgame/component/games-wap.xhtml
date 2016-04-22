@@ -18,49 +18,59 @@
     <cc:implementation>
         <h:form id="formListGame">  
             <div class="GAMEHOT_bg">
-                
+
                 <div class="GAMEHOT_title">
-                   #{cc.attrs.title}
-                  </div>
-                <div class="GAMEHOT_title_bg">
-                    <div class="GAMEHOT_title_bg_red"></div>
-                </div>
-                <div class="GameHOT">
-                    <ul>
-                        <c:forEach var="game" items="#{cc.attrs.games}">
-                            <li>
-                                <div class="GameHOT_box">
-                                    <a href="${request.contextPath}/chi-tiet-game-#{game.code}.html?id=#{game.id}"><img src="${resourceImage}/top-game-hotgame-img-1.png"/></a>
-                                    <div class="GameHOT_box_text">
-                                        <a href="${request.contextPath}/chi-tiet-game-#{game.code}.html?id=#{game.id}">#{game.name}</a>
-                                        <p><a href="${request.contextPath}/chuyen-muc-#{game.categoryCode}.html">#{game.categoryName}</a></p>
-                                    </div>
-                                </div>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                    <div class="both"></div>
+                    #{cc.attrs.title}
                 </div>
                 <c:choose>
-                    <c:when test="${empty param.typeView and empty cc.attrs.showPaging}">
-                        <div class="GameHOT_button">
-                            <button class="GameHOT_button_form">
-                                <a href="#{cc.attrs.linkMore}?action=view-more">XEM THÊM</a>
-                            </button>
-                        </div>
+                    <c:when test="#{empty cc.attrs.games}">
+                        Không có game nào đượctìm thấy
                     </c:when>
-                    <c:otherwise>                    
-                        <div class="SoTrang">
-                            <c:forEach var="pagination" items="#{cc.attrs.paginations}">
-                                <a href="#{cc.attrs.linkMore}?action=view-more&amp;p=#{pagination.value}" class="SoTrang_#{pagination.style}">#{pagination.label}</a>
-                            </c:forEach>
+                    <c:otherwise>
 
+                        <div class="GAMEHOT_title_bg">
+                            <div class="GAMEHOT_title_bg_red"></div>
                         </div>
-                    </c:otherwise>
+                        <div class="GameHOT">
+                            <ul>
+                                <c:forEach var="game" items="#{cc.attrs.games}">
+                                    <li>
+                                        <div class="GameHOT_box">
+                                            <a href="${request.contextPath}/#{game.code}-#{game.id}.html"><img src="${resourceImage}/top-game-hotgame-img-1.png"/></a>
+                                            <div class="GameHOT_box_text">
+                                                <a href="${request.contextPath}/#{game.code}-#{game.id}.html">#{game.name}</a>
+                                                <p><a href="${request.contextPath}/chuyen-muc-#{game.categoryCode}.html">#{game.categoryName}</a></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                            <div class="both"></div>
+                        </div>
+                        <c:choose>
+                            <c:when test="${empty param.typeView and empty cc.attrs.showPaging}">
+                                <div class="GameHOT_button">
+                                    <button class="GameHOT_button_form">
+                                        <a href="#{cc.attrs.linkMore}?action=view-more">XEM THÊM</a>
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:otherwise>     
+                                <c:if test="#{not empty cc.attrs.games}">
+                                    <div class="SoTrang">
+                                        <c:forEach var="pagination" items="#{cc.attrs.paginations}">
+                                            <a href="#{cc.attrs.linkMore}?action=view-more&amp;p=#{pagination.value}" class="SoTrang_#{pagination.style}">#{pagination.label}</a>
+                                        </c:forEach>
 
+                                    </div>
+                                </c:if>
+                            </c:otherwise>
+
+                        </c:choose>
+                    </c:otherwise>
                 </c:choose>
             </div>
-            
+
         </h:form>
     </cc:implementation>
 </html>

@@ -9,11 +9,7 @@ import inet.common.database.dao.AbstractDAO;
 import inet.common.database.dao.RowMapper;
 import inet.constant.Constant;
 import inet.entities.DownloadHistory;
-import inet.entities.Game;
 import java.sql.ResultSet;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

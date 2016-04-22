@@ -1,39 +1,35 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-    
-    <h:body>
-        <ui:composition template="../master-page-wap.xhtml">
-            <ui:define name="content">
-                <h:form>
-                    
-                    <div class="PageChitiet_bg">
-                        <div class="GAMEHOT_title">
-                                ĐĂNG NHẬP
-                        </div>
-                        <div class="GAMEHOT_title_bg">
-                                <div class="GAMEMOINHAT_title_bg_red"></div>
-                        </div>
-                        <div class="DANGNHAP">
-                            <h:inputText value="#{loginController.username}" maxlength="20" styleClass="DANGNHAP_form"
-                                         a:placeholder="Số điện thoại"/>
-                            <br/>
-                            <h:inputText value="#{loginController.password}" maxlength="20" styleClass="DANGNHAP_form"
-                                         a:placeholder="Mật khẩu"/>
-                            <h:outputText value="#{loginController.message}" style="color:red;"/>
-                            <p><a href="#" class="red">Quên mật khẩu!</a></p>
-                            <br/>
-                            <h:commandButton value="ĐĂNG NHẬP" actionListener="#{loginController.login()}"  class="DANGNHAP_button" style="margin:0 10px 0 0;"/>
-                            <h:commandButton value="ĐĂNG KÝ" actionListener="#{loginController.register()}"  class="DANGNHAP_button"/>
-                            
-                        </div>
-                   </div> 
-                </h:form>
-            </ui:define>
-        </ui:composition>
-    </h:body>
-</html>
+
+<ui:composition template="../master-page-wap.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content">
+        <h:form>
+
+            <div class="PageChitiet_bg">
+                <div class="GAMEHOT_title">
+                    ĐĂNG NHẬP
+                </div>
+                <div class="GAMEHOT_title_bg">
+                    <div class="GAMEMOINHAT_title_bg_red"></div>
+                </div>
+                <div class="DANGNHAP">
+                    <h:inputText value="#{loginController.username}" maxlength="20" styleClass="DANGNHAP_form"
+                                 a:placeholder="Số điện thoại"/>
+                    <br/>
+                    <h:inputText value="#{loginController.password}" maxlength="20" styleClass="DANGNHAP_form"
+                                 a:placeholder="Mật khẩu"/>
+                    <h:outputText value="#{loginController.message}" style="color:red;"/>
+                    <p><a href="#" class="red">Quên mật khẩu!</a></p>
+                    <br/>
+                    <h:commandButton value="ĐĂNG NHẬP" actionListener="#{loginController.login()}"  class="DANGNHAP_button" style="margin:0 10px 0 0;"/>
+                    <h:commandButton value="ĐĂNG KÝ" actionListener="#{loginController.register()}"  class="DANGNHAP_button"/>
+
+                </div>
+            </div> 
+        </h:form>
+    </ui:define>
+</ui:composition>
+
 

@@ -41,8 +41,12 @@ public class MasterPageController extends BaseController {
     public MasterPageController() {
         super();
         
-        categories = categoryCache.getAll();
-        initSeoTags();
+        try {
+            categories = categoryCache.getAll();
+            initSeoTags();
+        } catch (Exception ex) {
+            logToError("Get list category error: "+ex.getMessage());
+        }
     }
 
     private void initSeoTags(){
@@ -51,13 +55,19 @@ public class MasterPageController extends BaseController {
         if("chuyen-muc".equals(viewId)){
             String categoryCode = getParameter("categoryCode");
             if(categoryCode != null){
-                initSeoTags(categoryCache.getByCode(categoryCode));
+                try {
+                    initSeoTags(categoryCache.getByCode(categoryCode));
+                } catch (Exception ex) {
+                    logToError("init seo tag cho chuyen muc error "+ex.getMessage());
+                }
             }
         }else if("chi-tiet-game".equals(viewId)){
             try{
                 int gameId = Integer.valueOf(getParameter("id"));
                 initSeoTags(gameCache.findById(gameId));
-            }catch(Exception ex){}
+            }catch(Exception ex){
+                logToError("init seo tag cho chi tiet game id "+getParameter("id")+" error "+ex.getMessage());
+            }
         }else if("game".equals(viewId)){
             initSeoTags(seoCache.get("trang-chu"));
         }else{
@@ -90,9 +100,9 @@ public class MasterPageController extends BaseController {
     
     //backing bean action
     public void search(){
-        System.out.println("========================");
-        System.out.println("search action with game name = "+gameName +"|osType = "+osType);
-        System.out.println("========================");
+//        System.out.println("========================");
+//        System.out.println("search action with game name = "+gameName +"|osType = "+osType);
+//        System.out.println("========================");
         try {
             redirect(getContextPath()+"/ket-qua-tim-kiem.html?name="+gameName+"&osType="+osType);
         } catch (IOException ex) {

@@ -108,7 +108,7 @@ public class GameCache extends Cache {
     private String buildKeyGames(int catId, String os, int page, int pageSize) {
         StringBuilder sb = new StringBuilder();
         sb.append("category").append(catId).append(os).append("_page_")
-                .append(page);
+                .append(page).append("_pageSize_").append(pageSize);
         return sb.toString();
     }
     private String buildKeyGamesDownload(int accountId, int page) {

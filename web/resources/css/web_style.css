@@ -171,6 +171,7 @@ img{vertical-align:middle; border:0;}
 	font-family: 'Roboto', sans-serif;
 	text-align:left;
 	font-weight:bold;
+        margin-top: 10px;
 }
 /*------------------GameHOT---------------------*/
 .GameHOT{
@@ -209,6 +210,7 @@ img{vertical-align:middle; border:0;}
 	background-color:#FFF;
 	padding:8px;
 	border-radius: 3px;
+        min-height: 200px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 }
@@ -354,12 +356,17 @@ img{vertical-align:middle; border:0;}
 	padding:8px 0 8px 10px;
 	font-family: 'Roboto', sans-serif;
 }
+.TOPMIENPHI_List ul li a{
+	text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+}
 .TOPMIENPHI_List_img{
 	width:56px;
 	float:left;
 }
 .TOPMIENPHI_List_text{
-/*	margin-left:66px;*/
+	margin-left:66px;
 	text-align:left;
 	font-size:13px;
 	font-weight:bold;

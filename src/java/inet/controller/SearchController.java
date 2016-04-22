@@ -5,16 +5,9 @@
  */
 package inet.controller;
 
-import inet.cache.AccountCache;
-import inet.cache.management.CacheFactory;
-import inet.dao.AccountDao;
 import inet.dao.GameDAO;
-import inet.entities.Account;
 import inet.entities.Game;
-import inet.util.Constants;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 

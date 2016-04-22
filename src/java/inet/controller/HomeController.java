@@ -5,16 +5,11 @@
  */
 package inet.controller;
 
-import inet.cache.GameCache;
-import inet.cache.management.CacheFactory;
 import inet.constant.Constant;
 import inet.dao.GameDAO;
 import inet.entities.Game;
-import inet.entities.Pagination;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -51,7 +46,7 @@ public class HomeController extends BaseController{
 //        if(getParameter("action") != null && "view-more".equals(getParameter("action"))){
 //            isShowPaging = true;
 //        }
-        isShowPaging = getParameter("typeView") != null;
+        isShowPaging = !"".equals(getParameter("typeView"));
 //        System.out.println("=========="+ getParameter("typeView"));
         if(getParameter("p") != null){
             try{
@@ -65,10 +60,14 @@ public class HomeController extends BaseController{
     public List<Game> getGamesNewest() {
         if(gamesNewest.isEmpty()){
             try {
-                gamesNewest = gameCache.find(Game.GAME_NEWEST,categoryId, getCurrentPage(), getPageSize());
+                int pageSize = 4;
+                if("moi-nhat".equals(getParameter("typeView"))){
+                    pageSize = Constant.PAGE_SIZE;
+                }
+                gamesNewest = gameCache.find(Game.GAME_NEWEST,categoryId, getCurrentPage(), pageSize);
                 if(isShowPaging){
                     int count = GameDAO.getInstance().countGame();
-                    pagination(count);
+                    pagination(count,pageSize);
                 }
             } catch (Exception ex) {
                 logToError("Get list game newest error: "+ex.getMessage());

@@ -1,160 +1,149 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE HTML PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" 
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-    <f:view contentType="text/html">
-        <h:head>
-            <f:facet name="first">
-                <title>#{masterPageController.seoTitle}</title>
-                <meta name="description" content="#{masterPageController.seoDescrption }"/>
-                <meta name="keywords" content="#{masterPageController.seoKeyword}"/>
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <link rel="icon" href="${request.contextPath}/resources/images/favicon.png"   type="image/x-icon" />
-                <meta http-equiv='cache-control' content='no-cache'/>
-                <meta http-equiv='expires' content='0'/>
-                <meta http-equiv='pragma' content='no-cache'/>
-                <script type="text/javascript" src="${request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+    <h:head>
+            <title>#{masterPageController.seoTitle}</title>
+            <meta name="description" content="#{masterPageController.seoDescrption }"/>
+            <meta name="keywords" content="#{masterPageController.seoKeyword}"/>
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <link rel="icon" href="${request.contextPath}/resources/images/favicon.png"   type="image/x-icon" />
+            <script type="text/javascript" src="${request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+            <link href="${request.contextPath}/resources/css/wap_style.css" rel="stylesheet" type="text/css" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+            <link href='http://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=vietnamese,latin,latin-ext' rel='stylesheet' type='text/css'/>
+            <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&amp;subset=vietnamese,latin,latin-ext" />
+            <script>
+                $(document).ready(function (e) {
+                    $('.Footer_bg_link').click(function () {
+                        $(this).next().stop().slideToggle(200);
+                    });
 
-                <link href='http://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=vietnamese,latin,latin-ext' rel='stylesheet' type='text/css'/>
-                <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&amp;subset=vietnamese,latin,latin-ext" />
-                <script>
-                    $(document).ready(function (e) {
-                        $('.Footer_bg_link').click(function () {
-                            $(this).next().stop().slideToggle(200);
-                        });
+                    $('.Header_Timkiem').click(function () {
+                        $(this).next().stop().slideDown(200);
+                        $('.BoxTimkiem_bg').stop().fadeIn();
+                    });
+                    $('.BoxTimkiem_bg').click(function () {
+                        $('.BoxTimkiem').stop().slideUp(200);
+                        $('.BoxTimkiem_bg').stop().fadeOut();
+                    });
 
-                        $('.Header_Timkiem').click(function () {
-                            $(this).next().stop().slideDown(200);
-                            $('.BoxTimkiem_bg').stop().fadeIn();
-                        });
-                        $('.BoxTimkiem_bg').click(function () {
-                            $('.BoxTimkiem').stop().slideUp(200);
-                            $('.BoxTimkiem_bg').stop().fadeOut();
-                        });
-
-                        var b = true;
-                        $('.Header_menu .Menu_Icon').click(function () {
-                            if (b) {
-                                $(this).next().stop().animate({'left': '0'}, 200);
-                                $('.Header_menu .Menubg').stop().fadeIn();
-                                b = false;
-                            } else {
-                                $(this).next().stop().animate({'left': '-280'}, 100);
-                                $('.Header_menu .Menubg').stop().fadeOut();
-                                b = true;
-                            }
-                        });
-                        $('.Header_menu .Menubg').click(function () {
-                            $(this).prev().stop().animate({'left': '-280'}, 100);
+                    var b = true;
+                    $('.Header_menu .Menu_Icon').click(function () {
+                        if (b) {
+                            $(this).next().stop().animate({'left': '0'}, 200);
+                            $('.Header_menu .Menubg').stop().fadeIn();
+                            b = false;
+                        } else {
+                            $(this).next().stop().animate({'left': '-280'}, 100);
                             $('.Header_menu .Menubg').stop().fadeOut();
                             b = true;
-                        });
+                        }
                     });
-                </script>
-                <ui:insert name="headTag"/>                
-                <ui:insert name="js"/>
-            </f:facet>
-            <f:facet name="last">
-                <h:outputStylesheet library="css" name="wap_style.css" />
-            </f:facet>
+                    $('.Header_menu .Menubg').click(function () {
+                        $(this).prev().stop().animate({'left': '-280'}, 100);
+                        $('.Header_menu .Menubg').stop().fadeOut();
+                        b = true;
+                    });
+                });
+            </script>
+            <ui:insert name="headTag"/>                
+            <ui:insert name="js"/>
+    </h:head>
 
+    <h:body>
+        <c:set var="resourceImage" value="${request.contextPath}/resources/images"/>
+        <c:set var="realUri" value="#{masterPageController.realUri}"/>
+        <center>
+            <div class="Header_bg">
+                <img src="${resourceImage}/top-game-logo-wap.png" style="padding:8px 0 0 0;"/>
+                <div class="Header_menu">
+                    <a href="#" class="Menu_Icon"><img src="${resourceImage}/top-game-icon-menu.png"/></a>
+                    <div class="Menu_Left_list">
+                        <ul>
+                            <li><a href="#"><img src="${resourceImage}/top-game-icon-danhmucgame.png" class="Menu_Left_list_kc"/>DANH MỤC GAME</a>
+                                <div class="Menu_Left_sublist">
+                                    <ul>
+                                        <c:forEach var="category" items="#{masterPageController.categories}">
+                                            <li>
+                                                <a href="${request.contextPath}/chuyen-muc-#{category.code}.html">
+                                                    <c:if test="${not empty category.avatar}">
+                                                        <img src="${request.contextPath}/#{category.avatar}" class="Menu_Left_icon_kc"/>
+                                                    </c:if>
+                                                    #{category.name}
+                                                </a>
+                                                <div class="Menu_Left_sublist_soluonggame">
+                                                        #{category.totalGame}
+                                                </div>
+                                            </li>
+                                        </c:forEach>
 
-        </h:head>
-
-        <h:body>
-            <c:set var="resourceImage" value="${request.contextPath}/resources/images"/>
-            <c:set var="realUri" value="#{masterPageController.realUri}"/>
-            <center>
-                <div class="Header_bg">
-                    <img src="${resourceImage}/top-game-logo-wap.png" style="padding:8px 0 0 0;"/>
-                    <div class="Header_menu">
-                        <a href="#" class="Menu_Icon"><img src="${resourceImage}/top-game-icon-menu.png"/></a>
-                        <div class="Menu_Left_list">
-                            <ul>
-                                <li><a href="#"><img src="${resourceImage}/top-game-icon-danhmucgame.png" class="Menu_Left_list_kc"/>DANH MỤC GAME</a>
-                                    <div class="Menu_Left_sublist">
-                                        <ul>
-                                            <c:forEach var="category" items="#{masterPageController.categories}">
-                                                <li>
-                                                    <a href="${request.contextPath}/chuyen-muc-#{category.code}.html">
-                                                        <c:if test="${not empty category.avatar}">
-                                                            <img src="${request.contextPath}/#{category.avatar}" class="Menu_Left_icon_kc"/>
-                                                        </c:if>
-                                                        #{category.name}
-                                                    </a>
-                                                    <div class="Menu_Left_sublist_soluonggame">
-
-                                                    </div>
-                                                </li>
-                                            </c:forEach>
-                                            
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="Menubg"></div>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="Header_Timkiem">
-                        <a href="#"><img src="${resourceImage}/top-game-icon-timkiem.png"/></a>
-                    </div>
-                    <div class="BoxTimkiem">
-                        <h:form>
-                            <h:selectOneMenu value="#{masterPageController.osType}">
-                                <f:selectItem itemValue="" itemLabel="Tất cả OS"/>
-                                <f:selectItem itemValue="android" itemLabel="Android"/>
-                                <f:selectItem itemValue="ios" itemLabel="iOS"/>
-                            </h:selectOneMenu>
-                            <br />
-                            <h:inputText value="#{masterPageController.gameName}" a:placeholder="Nhập game tìm kiếm"
-                                         maxlength="100" styleClass="Menu_Android_timkiem" />
-                            <br />
-                            <h:commandButton value=" TÌM KIẾM" styleClass="Menu_Android_button"
-                                             actionListener="#{masterPageController.search()}"/>
-                                	         
-                        </h:form>
-                    </div>
-                    <div class="BoxTimkiem_bg"></div>
+                    <div class="Menubg"></div>
                 </div>
-                
-                <div class="Menu_bg">
-                        
-                        <div class="Menu_Content">
-                            <ul>
-                                <li><a href="${request.contextPath}/trang-chu.html" class="${empty typeView ? 'active' : ''}">HOME</a></li>
-                                <li><a href="${request.contextPath}/game-moi-nhat.html" class="${typeView eq 'moi-nhat' ? 'active' : ''}">MỚI NHẤT</a></li>
-                                <li><a href="${request.contextPath}/game-hot-nhat.html" class="${typeView eq 'hot-nhat' ? 'active' : ''}">ĐANG HOT</a></li>
-                                <li><a href="${request.contextPath}/game-xem-nhieu.html" class="${typeView eq 'xem-nhieu' ? 'active' : ''}">XEM NHIỀU</a></li>
-                            </ul>
-                            <div class="both"></div>
-                        </div>
-                        
-                </div><!-- End Menu -->
-                <div class="Main">
-                    <div class="THONGBAO">
-                        <c:choose>
-                            <!-- TH Không nhận diện được thuê bao-->
-                            <c:when test="${empty sessionScope.ACCOUNT and empty sessionScope.MOBILE}">
-                                Quý khách đang truy cập bằng wifi, vui lòng 
-                                <a href="${request.contextPath}/dang-nhap.html" class="red">đăng nhập</a> tại đây hoặc vui lòng chuyển sang truy cập bằng GPRS/3G/EDGE của Viettel
-                            </c:when>
-                            <c:otherwise>
-                                <a href="${request.contextPath}/trang-ca-nhan.html" class="red">${sessionScope.MOBILE}</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                    <ui:insert name="content"/>
+                <div class="Header_Timkiem">
+                    <a href="#"><img src="${resourceImage}/top-game-icon-timkiem.png"/></a>
                 </div>
-                <div class="Footer">
-    	Copyright © ABC .Điện thoại hỗ trợ: 19001255
-    </div>
-            </center>
-        </h:body>
+                <div class="BoxTimkiem">
+                    <h:form>
+                        <h:selectOneMenu value="#{masterPageController.osType}">
+                            <f:selectItem itemValue="" itemLabel="Tất cả OS"/>
+                            <f:selectItem itemValue="android" itemLabel="Android"/>
+                            <f:selectItem itemValue="ios" itemLabel="iOS"/>
+                        </h:selectOneMenu>
+                        <br />
+                        <h:inputText value="#{masterPageController.gameName}" a:placeholder="Nhập game tìm kiếm"
+                                     maxlength="100" styleClass="Menu_Android_timkiem" />
+                        <br />
+                        <h:commandButton value=" TÌM KIẾM" styleClass="Menu_Android_button"
+                                         actionListener="#{masterPageController.search()}"/>
 
-    </f:view>
+                    </h:form>
+                </div>
+                <div class="BoxTimkiem_bg"></div>
+            </div>
+
+            <div class="Menu_bg">
+
+                <div class="Menu_Content">
+                    <ul>
+                        <li><a href="${request.contextPath}/trang-chu.html" class="${empty typeView ? 'active' : ''}">HOME</a></li>
+                        <li><a href="${request.contextPath}/game-moi-nhat.html" class="${typeView eq 'moi-nhat' ? 'active' : ''}">MỚI NHẤT</a></li>
+                        <li><a href="${request.contextPath}/game-hot-nhat.html" class="${typeView eq 'hot-nhat' ? 'active' : ''}">ĐANG HOT</a></li>
+                        <li><a href="${request.contextPath}/game-xem-nhieu.html" class="${typeView eq 'xem-nhieu' ? 'active' : ''}">XEM NHIỀU</a></li>
+                    </ul>
+                    <div class="both"></div>
+                </div>
+
+            </div><!-- End Menu -->
+            <div class="Main">
+                <div class="THONGBAO">
+                    <c:choose>
+                        <!-- TH Không nhận diện được thuê bao-->
+                        <c:when test="${empty sessionScope.ACCOUNT and empty sessionScope.MOBILE}">
+                            Quý khách đang truy cập bằng wifi, vui lòng 
+                            <a href="${request.contextPath}/dang-nhap.html" class="red">đăng nhập</a> tại đây hoặc vui lòng chuyển sang truy cập bằng GPRS/3G/EDGE của Viettel
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${request.contextPath}/trang-ca-nhan.html" class="red">${sessionScope.MOBILE}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <ui:insert name="content"/>
+            </div>
+            <div class="Footer">
+                Copyright © ABC .Điện thoại hỗ trợ: 19001255
+            </div>
+        </center>
+    </h:body>
+
 </html>

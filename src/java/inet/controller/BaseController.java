@@ -60,9 +60,12 @@ public class BaseController implements Serializable {
     public String routing() {
         return isMobile ? "wap": "web"; 
     }
+    public void pagination(int dataSize){
+        pagination(dataSize,pageSize);
+    }
     
-    public void pagination(int dataSize) {
-        
+    public void pagination(int dataSize,int _pageSize) {
+        int pageSize = _pageSize;
         // init paginations array
         paginations = new ArrayList<Pagination>();
         int display = 5;
