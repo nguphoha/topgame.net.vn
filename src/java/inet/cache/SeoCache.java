@@ -10,6 +10,7 @@ import inet.entities.Seo;
 import java.util.HashMap;
 import java.util.Map;
 import inet.dao.SeoDao;
+import java.util.logging.Level;
 
 /**
  *

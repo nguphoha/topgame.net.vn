@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/wap/master.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="PageChitiet_bg">
+            <div class="Pages_chitiet_link">
+                <a href="#{realUri}">Trang chủ </a>  >>  <a href="#{realUril}/#{gameController.game.category.code}.html">#{gameController.game.category.name}</a>
+            </div>
+            <div class="PageChitiet_content">
+                <div class="PageChitiet_content_img">
+                    <img src="#{realUri}#{gameController.game.avatar}"/>
+                </div>
+                <div class="PageChitiet_content_text">
+                    <p>#{gameController.game.name}</p>
+                    <strong>Thể loại:</strong> #{gameController.game.category.name}<br />
+                    <strong>Lượt xem: </strong> <h:outputText value="#{gameController.game.viewCount}"><f:convertNumber pattern="###,###,###"/></h:outputText><br /> 
+                    <strong>Luợt tải: </strong> <h:outputText value="#{gameController.game.downloadCount}"><f:convertNumber pattern="###,###,###"/></h:outputText>
+                </div>
+                <div class="both"></div>
+                <div class="PageChitiet_button">
+
+                    <c:choose>
+                        <c:when test="#{ACCOUNT eq null and MOBILE eq NULL}">
+                            <button class="Pages_chitiet_content_text_button">
+                                Đăng nhập để tải game
+                            </button>
+                        </c:when>
+                        <c:when test="#{ACCOUNT ne null}">
+                            <button class="Pages_chitiet_content_text_button">
+                                Tải game
+                            </button>
+                        </c:when>
+                        <c:when test="#{MOBILE ne null and ACCOUNT eq null}">
+                            <button class="Pages_chitiet_content_text_button">
+                                Đăng ký dịch vụ để tải game
+                            </button>
+                        </c:when>
+                    </c:choose>                      
+                </div>
+            </div>
+        </div>
+        <div class="Pages_chitiet_MOTA">
+            <div class="GAMEHOT_title">
+                MÔ TẢ
+            </div>
+            <div class="Page_chitiet_Mota_TEXT">
+                <h:outputText escape="false" value="#{gameController.game.description}"/>
+            </div>	
+        </div>
+        <div class="GAMEHOT_bg">
+            <div class="GAMEHOT_title">
+                GAME CÙNG THỂ LOẠI
+            </div>
+            <div class="GAMEHOT_title_bg">
+                <div class="GAMEHOT_title_bg_red"></div>
+            </div>
+            <div class="GameHOT">
+                <ul>
+                    <c:forEach var="item" items="#{gameController.games}">
+                        <li>
+                            <div class="GameHOT_box">
+                                <a href="#{realUri}/#{item.category.code}/#{item.url}"><img src="#{realUri}/#{item.avatar}"/></a>
+                                <div class="GameHOT_box_text">
+                                    <a href="#{realUri}/#{item.url}">#{item.name}</a>
+                                    <p><a href="#{realUri}/#{item.category.code}.html">#{item.category.name}</a></p>
+                                </div>
+                            </div>
+                        </li>    
+                    </c:forEach>
+                </ul>
+                <div class="both"></div>
+            </div>
+            <div class="GameHOT_button">
+                <button class="GameHOT_button_form" onclick="window.location = '#{realUril}/#{gameController.game.category.code}.html'">
+                    XEM THÊM
+                </button>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <c:set var="contextPath" value="#{request.contextPath}"/>
+    <c:set var="realUri" value="#{masterController.realUri}"/>
+    <c:set var="ACCOUNT" value="#{sessionScope.ACCOUNT}"/>
+    <c:set var="MOBILE" value="#{sessionScope.MOBILE}"/>
+
+    <h:head>
+        <h:outputText value="#{seoController.seo}" escape="false"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="#{realUri}/wap/resource/css/style.css" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"/>
+
+        <script>
+            $(document).ready(function (e) {
+                $('.Footer_bg_link').click(function () {
+                    $(this).next().stop().slideToggle(200);
+                });
+
+                $('.Header_Timkiem').click(function () {
+                    $(this).next().stop().slideDown(200);
+                    $('.BoxTimkiem_bg').stop().fadeIn();
+                });
+                $('.BoxTimkiem_bg').click(function () {
+                    $('.BoxTimkiem').stop().slideUp(200);
+                    $('.BoxTimkiem_bg').stop().fadeOut();
+                });
+
+                var b = true;
+                $('.Header_menu .Menu_Icon').click(function () {
+                    if (b) {
+                        $(this).next().stop().animate({'left': '0'}, 200);
+                        $('.Header_menu .Menubg').stop().fadeIn();
+                        b = false;
+                    } else {
+                        $(this).next().stop().animate({'left': '-280'}, 100);
+                        $('.Header_menu .Menubg').stop().fadeOut();
+                        b = true;
+                    }
+                });
+                $('.Header_menu .Menubg').click(function () {
+                    $(this).prev().stop().animate({'left': '-280'}, 100);
+                    $('.Header_menu .Menubg').stop().fadeOut();
+                    b = true;
+                });
+            });
+        </script>
+
+    </h:head>
+    <h:body>
+
+        <div class="Header_bg">
+            <a href="#{realUri}">
+                <img src="#{realUri}/wap/resource/images/top-game-logo.png" style="padding:8px 0 0 0;"/>
+            </a>
+            <div class="Header_menu">
+                <a href="#" class="Menu_Icon"><img  src="#{realUri}/wap/resource/images/top-game-icon-menu.png"/></a>
+                <div class="Menu_Left_list">
+                    <ul>
+                        <li><a href="#"><img  src="#{realUri}/wap/resource/images/top-game-icon-danhmucgame.png" class="Menu_Left_list_kc"/>DANH MỤC GAME</a>
+                            <div class="Menu_Left_sublist">
+                                <ul>
+                                    <c:forEach var="item" items="#{masterController.categories}">
+                                        <li>
+                                            <a href="#{realUri}/#{item.code}.html"><img  src="#{realUri}/#{item.avatar}" class="Menu_Left_icon_kc"/>#{item.name}</a>
+                                            <div class="Menu_Left_sublist_soluonggame">
+                                                #{item.totalGame}
+                                            </div>
+                                        </li>     
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="Menubg"></div>
+            </div>
+            <div class="Header_Timkiem">
+                <a href="#"><img  src="#{realUri}/wap/resource/images/top-game-icon-timkiem.png"/></a>
+            </div>
+            <div class="BoxTimkiem">
+                <h:form id="frmSearch" prependId="false">
+                    <h:selectOneMenu value="#{masterController.categoryCode}" styleClass="Menu_Android">
+                        <f:selectItem itemLabel="Tất cả thể loại" itemValue=""/>
+                        <c:forEach var="item" items="#{masterController.categories}">
+                            <f:selectItem itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                        </c:forEach>
+                    </h:selectOneMenu>
+                    <br />
+                    <h:inputText value="#{masterController.gameName}" p:placeholder="Bạn muốn chơi game gì...?" styleClass="Menu_Android_timkiem"/>
+                    <br />
+                    <h:commandButton value="TÌM KIẾM" actionListener="#{masterController.search()}" styleClass="Menu_Android_button" />      
+                </h:form>
+            </div>
+            <div class="BoxTimkiem_bg"></div>
+        </div>
+
+        <div class="Menu_bg">
+            <div class="Menu_Content">
+                <ul>
+                    <li><a href="#{realUri}" class="${empty code ? 'active' : ''}">HOME</a></li>
+                    <li><a href="#{realUri}/game-moi-nhat.html" class="${code eq 'game-moi-nhat' ? 'active' : ''}">MỚI NHẤT</a></li>
+                    <li><a href="#{realUri}/game-hot-nhat.html"  class="${code eq 'game-hot-nhat' ? 'active' : ''}">ĐANG HOT</a></li>
+                    <li><a href="#{realUri}/game-xem-nhieu-nhat.html"  class="${code eq 'game-xem-nhieu-nhat' ? 'active' : ''}">XEM NHIỀU</a></li>
+                </ul>
+                <div class="both"></div>
+            </div>
+        </div>
+
+        <div class="Main">
+
+            <div class="THONGBAO">
+                <c:choose>
+                    <c:when test="#{ACCOUNT eq null and MOBILE eq NULL}">
+                        Quý khách đang truy cập bằng wifi, vui lòng <a href="#{realUri}/dang-nhap.html" class="red" style="text-decoration: underline;">ĐĂNG NHẬP</a> để tải Game hoặc chuyển sang truy cập bằng GPRS/3G/EDGE của Viettel
+                    </c:when>
+                    <c:when test="#{ACCOUNT ne null}">
+                        Xin chào <a href="#{realUri}/trang-ca-nhan.html" class="red" style="text-decoration: underline;">#{ACCOUNT.mobile}</a>
+                    </c:when>
+                    <c:when test="#{MOBILE ne null and ACCOUNT eq null}">
+                        Xin chào #{MOBILE}
+                        <a href="#{realUri}/dang-ky.html?code=LIFESOFT" class="red" style="text-decoration:underline">Đăng Ký Dịch Vụ</a> để tải game miễn phí
+                    </c:when>
+                </c:choose>                 
+            </div>
+            <ui:insert name="content"/>
+        </div>
+        <div class="Footer">
+            Copyright © TOPGAME .Điện thoại hỗ trợ: 046 6514585 
+        </div>
+    </h:body>
+</html>
+

@@ -16,10 +16,14 @@ import java.sql.Timestamp;
 @Table(name = "category")
 public class Category {
 
+    public static final int HOT = 999999999;
+    public static final int NEW = 999999998;
+    public static final int VIEW = 999999997;
+
     public static int ALL = -1;
     public static int INACTIVE = 0;
     public static int ACTIVE = 1;
-    
+
     @Column(name = "id", PK = true)
     int id;
 
@@ -46,7 +50,7 @@ public class Category {
 
     @Column(name = "seo_description")
     String seoDescription;
-    
+
     int totalGame;
 
     public int getId() {
@@ -129,9 +133,4 @@ public class Category {
         this.totalGame = totalGame;
     }
 
-    @Override
-    public String toString() {
-        return "Category{" + "id=" + id + ", name=" + name + ", code=" + code + ", dateCreate=" + dateCreate + ", avatar=" + avatar + ", status=" + status + ", seoTitle=" + seoTitle + ", seoKeyword=" + seoKeyword + ", seoDescription=" + seoDescription + '}';
-    }
-    
 }

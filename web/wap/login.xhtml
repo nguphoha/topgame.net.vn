@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/wap/master.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+
+        <div class="PageChitiet_bg">
+            <div class="GAMEHOT_title">
+                ĐĂNG NHẬP
+            </div>
+            <div class="GAMEHOT_title_bg">
+                <div class="GAMEHOT_title_bg_red"></div>
+            </div>
+            <h:form id="frmLogin" prependId="false">
+                <div class="DANGNHAP">                
+                    <h:inputText id="mobile" value="#{accountController.mobile}" p:placeholder="Số điện thoại" styleClass="DANGNHAP_form"/>
+                    <h:inputText id="password" value="#{accountController.password}" p:placeholder="Mật khẩu" styleClass="DANGNHAP_form"/>                    
+                    <p><a href="#" class="red"></a></p>
+                    <h:commandButton value="Đăng Nhập" styleClass="DANGNHAP_button" actionListener="#{accountController.login()}"  style="margin:0 10px 0 0;" onclick="return loginValidate()"/>                    
+                    <button class="DANGNHAP_button">
+                        ĐĂNG KÝ
+                    </button>
+                </div>
+            </h:form>
+        </div>
+        <script>
+            function loginValidate() {
+
+                var mobile = document.getElementById("mobile");
+                var password = document.getElementById("password");
+
+                if (mobile.value === '') {
+                    mobile.focus();
+                    alert('Vui lòng nhập số điện thoại!');
+                    return false;
+                }
+
+                var mobileRegex = new RegExp("(012|016|09|9|12|16|849|8412|8416)\\d{8}$");
+                if (!mobileRegex.test(mobile.value)) {
+                    mobile.focus();
+                    alert('Số điện thoại không hợp lệ!');
+                    return false;
+                }
+                
+                 if (password.value === '') {
+                    password.focus();
+                    alert('Vui lòng nhập mật khẩu!');
+                    return false;
+                }
+                
+            }
+        </script>
+    </ui:define>
+
+</ui:composition>

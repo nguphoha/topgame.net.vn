@@ -6,15 +6,12 @@
 package inet.cache;
 
 import inet.cache.management.Cache;
-import java.util.HashMap;
 import java.util.Map;
 import inet.dao.CategoryDAO;
-import inet.dao.GameDAO;
 import inet.entities.Category;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -22,37 +19,31 @@ import java.util.logging.Logger;
  */
 public class CategoryCache extends Cache {
 
-    private Map<String, Category> categoryCache = new HashMap<String, Category>();
-    //private Map<String,List<Category>> cacheCategories = new HashMap<String, List<Category>>();
+    private Map<String, Category> datas = new ConcurrentHashMap<String, Category>();
     private List<Category> categories = new ArrayList();
 
     public Category getByCode(String code) throws Exception {
-        Category category = categoryCache.get(code);
-        synchronized (categoryCache) {
+        Category category = datas.get(code);
+        synchronized (datas) {
             if (category == null) {
-                category = CategoryDAO.getInstance().getByCode(code);
+                CategoryDAO dao = new CategoryDAO();
+                category = dao.getByCode(code);
                 if (category != null) {
-                    category.setTotalGame(GameDAO.getInstance().countGameByCategory(category.getId(), ""));
-                    categoryCache.put(code, category);
+                    datas.put(code + "", category);
                 }
-
             }
             return category;
         }
     }
 
-    public Category getById(int id) {
-        //String key = "categoryId_"+id;
-        Category category = categoryCache.get(id + "");
-        synchronized (categoryCache) {
+    public Category getById(int id) throws Exception {
+        Category category = datas.get(id + "");
+        synchronized (datas) {
             if (category == null) {
-                try {
-                    category = CategoryDAO.getInstance().getById(id);
-                    if (category != null) {
-                        categoryCache.put(id + "", category);
-                    }
-                } catch (Exception ex) {
-                    Logger.getLogger(CategoryCache.class.getName()).log(Level.SEVERE, null, ex);
+                CategoryDAO dao = new CategoryDAO();
+                category = dao.getById(id);
+                if (category != null) {
+                    datas.put(id + "", category);
                 }
             }
             return category;
@@ -62,16 +53,12 @@ public class CategoryCache extends Cache {
     public List<Category> getAll() throws Exception {
         synchronized (categories) {
             if (categories.isEmpty()) {
-                categories = CategoryDAO.getInstance().find(Category.ACTIVE);
-                if (categories != null && !categories.isEmpty()) {
-                    for (Category c : categories) {
-                        c.setTotalGame(GameDAO.getInstance().countGameByCategory(c.getId(), ""));
-                        if (!categoryCache.containsKey(c.getId() + "")) {
-                            categoryCache.put(c.getId() + "", c);
-                        }
-                        if (!categoryCache.containsKey(c.getCode())) {
-                            categoryCache.put(c.getCode(), c);
-                        }
+                CategoryDAO dao = new CategoryDAO();
+                categories = dao.find();
+                if (!categories.isEmpty()) {
+                    for (Category item : categories) {
+                        datas.put(String.valueOf(item.getId()), item);
+                        datas.put(item.getCode(), item);
                     }
                 }
             }
@@ -82,7 +69,7 @@ public class CategoryCache extends Cache {
     @Override
     public void clearCache() {
         synchronized (this) {
-            categoryCache.clear();
+            datas.clear();
             categories.clear();
         }
     }

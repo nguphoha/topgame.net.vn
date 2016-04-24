@@ -18,8 +18,8 @@ public class Seo implements Serializable {
     private String title;
     private String description;
     private String keyword;
-    private String image;
-    private String pageDescription;
+    private String name;
+    //private String pageDescription;
 
 //    private static final String SEO_PATTERN = "\n\t<title>~TITLE~</title>\n"
 //            + "\t<meta name=\"description\" content=\"~DESCRIPTION~\"/>\n"
@@ -46,14 +46,14 @@ public class Seo implements Serializable {
             + "\t<meta name=\"author\" content=\"nhanmenh.vn\">\n"
             + "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
             + "\t<meta name='robots' content='index, follow, noodp'/>\n"
-            + "\t<meta content=\"nhanmenh\" name=\"copyright\" />\n"
+            + "\t<meta content=\"topgame\" name=\"copyright\" />\n"
             + "\t<meta property=\"og:type\" content=\"Article\" />\n"
             + "\t<meta property=\"og:title\" content=\"~TITLE~\" />\n"
             + "\t<meta property=\"og:description\" content='~DESCRIPTION~' />\n"
             + "\t<meta property=\"og:image\" content='~IMAGE~'/>\n"
             + "\t<meta property=\"og:url\" content='~PARAM~' />\n"
-            + "\t<meta property=\"og:site_name\" content=\"Hệ thống phong thủy - Nhân Mệnh\" />\n"
-            + "\t<meta property='article:publisher' content='https://nhanmenh.vn' />\n"
+            + "\t<meta property=\"og:site_name\" content=\"Kho ứng dụng game mobile\" />\n"
+            + "\t<meta property='article:publisher' content='https://topgame.net.vn' />\n"
             + "\t<meta property=\"og:locale\" content=\"vi_VN\" />\n"
             + "\t<meta name=\"abstract\" content=\"\" />\n"
             + "\t<meta name=\"distribution\" content=\"global\">\n"
@@ -86,17 +86,19 @@ public class Seo implements Serializable {
         this.keyword = keyword;
     }
 
-    public String getImage() {
-        return image;
+    public String getName() {
+        return name;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    
 
     public String getResult() {
         String str = SEO_PATTERN;
-        image = StringUtil.nvl(image, "");
+        name = StringUtil.nvl(name, "");
         title = StringUtil.nvl(title, "");
         description = StringUtil.nvl(description, "");
         keyword = StringUtil.nvl(keyword, "");
@@ -104,7 +106,7 @@ public class Seo implements Serializable {
         str = str.replaceAll("~TITLE~", title);
         str = str.replaceAll("~DESCRIPTION~", description);
         str = str.replaceAll("~KEYWORD~", keyword);
-        str = str.replaceAll("~IMAGE~", image);
+        //str = str.replaceAll("~IMAGE~", image);
         str = str.replaceAll("~PARAM~", url);
         return str;
     }
@@ -117,12 +119,6 @@ public class Seo implements Serializable {
         this.url = url;
     }
 
-    public String getPageDescription() {
-        return pageDescription;
-    }
-
-    public void setPageDescription(String pageDescription) {
-        this.pageDescription = pageDescription;
-    }
+    
 
 }

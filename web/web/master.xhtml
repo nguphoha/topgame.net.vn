@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <c:set var="contextPath" value="#{request.contextPath}"/>
+    <c:set var="realUri" value="#{masterController.realUri}"/>
+    <c:set var="resUri" value="${realUri}/web/resource"/>
+    <c:set var="ACCOUNT" value="#{sessionScope.ACCOUNT}"/>
+    <c:set var="MOBILE" value="#{sessionScope.MOBILE}"/>
+    <h:head>
+        <h:outputText value="#{seoController.seo}" escape="false"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        
+        <link href="${realUri}/web/resource/css/style.css" rel="stylesheet" type="text/css" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=vietnamese,latin,latin-ext' rel='stylesheet' type='text/css'/>
+        <link href="${realUri}/web/resource/css/Rep.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <center>
+            <div class="Header_bg">
+                <div class="Header">
+                    <div class="Header_logo">
+                        <img src="${realUri}/web/resource/images/top-game-logo.png"/>
+                    </div>
+
+                    <h:form id="frmSearch" prependId="false">
+                        <h:selectOneMenu value="#{masterController.categoryCode}" styleClass="Header_Danhmuc">
+                            <f:selectItem itemLabel="Tất cả thể loại" itemValue=""/>
+                            <c:forEach var="item" items="#{masterController.categories}">
+                                <f:selectItem itemLabel="#{item.name}" itemValue="#{item.code}"/>
+                            </c:forEach>
+                        </h:selectOneMenu>
+                        <h:inputText value="#{masterController.gameName}" p:placeholder="Bạn muốn chơi game gì...?" styleClass="Header_Timkiem"/>
+                        <h:commandButton value="TÌM KIẾM" actionListener="#{masterController.search()}" styleClass="Header_button" style="margin-right: 10px;"/>      
+                    </h:form>
+
+
+                    <div class="Header_hotline">
+                        HOTLINE: 1900 15959
+                    </div>
+                </div>
+            </div>
+            <div class="Menu_bg">
+                <div class="Menu">
+
+                    <div class="Menu_Content">
+                        <ul>
+                            <li><a href="#{realUri}" class="${empty code ? 'active' : ''}">HOME</a></li>
+                            <li><a href="#{realUri}/game-moi-nhat.html" class="${code eq 'game-moi-nhat' ? 'active' : ''}">MỚI NHẤT</a></li>
+                            <li><a href="#{realUri}/game-hot-nhat.html"  class="${code eq 'game-hot-nhat' ? 'active' : ''}">ĐANG HOT</a></li>
+                            <li><a href="#{realUri}/game-xem-nhieu-nhat.html"  class="${code eq 'game-xem-nhieu-nhat' ? 'active' : ''}">XEM NHIỀU</a></li>
+                        </ul>
+                        <div class="both"></div>
+                    </div>
+                    <div class="Menu_Khach">
+                        <img src="${resUri}/images/top-game-icon-user.png" style="padding:0 5px 3px 0;"/>
+                        <c:choose>
+                            <c:when test="#{ACCOUNT eq null and MOBILE eq NULL}">
+                                <a href="#{realUri}/dang-nhap.html" class="red" style="text-decoration: underline;">Xin chào! Khách... </a>
+                            </c:when>
+                            <c:when test="#{ACCOUNT ne null}">
+                                Xin chào <a href="#{realUri}/trang-ca-nhan.html" class="red" style="text-decoration: underline;"> #{ACCOUNT.mobile}</a>
+                            </c:when>
+                            <c:when test="#{MOBILE ne null and ACCOUNT eq null}">
+                                Xin chào 
+                                <a href="#{realUri}/dang-ky.html?code=LIFESOFT" class="red" style="text-decoration:underline"> #{MOBILE}</a>
+                            </c:when>
+                        </c:choose>  
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="Main">
+                <div class="Main_left">
+                    <ui:insert name="content"/>
+                </div>
+                <div class="Main_right">
+                    <div class="TOPMIENPHI_title">
+                        DANH MỤC GAME
+                    </div>
+                    <div class="TOPMIENPHI_List">    
+                        <ul>
+
+                            <c:forEach var="item" items="#{masterController.categories}">
+                                <li>
+                                    <a href="#{realUri}/#{item.code}.html">
+                                        <img  src="#{resUri}/images/icon/DM-#{item.code}.png" class="TOPMIENPHI_List_kc"/>
+                                        #{item.name}
+                                    </a>
+                                </li>     
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+                <div class="both"></div>
+            </div>
+            <div class="Footer">
+                Copyright © ABC .Điện thoại hỗ trợ: 19001255
+            </div>
+        </center>
+    </h:body>
+</html>
+

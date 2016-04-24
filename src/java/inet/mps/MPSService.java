@@ -8,6 +8,7 @@ package inet.mps;
 import com.viettel.iwebgate.rsa.encrypt.EncryptManager;
 import inet.util.StringUtil;
 import java.net.URLDecoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class MPSService {
 
-//    public static final String TRANSACTION = "TRANSACTION";
     public static final String CMD_REGISTER = "REGISTER";
     public static final String CMD_CANCEL = "CANCEL";
     public static final String CMD_DEPOSIT = "DEPOSIT";
@@ -37,6 +37,15 @@ public abstract class MPSService {
     public static final String SUB = "Đăng ký dịch vụ TopGame - 2000/ngày";
     public static final String CONT = "TopGame Subscribe";
 
+    public static final String SUCCESS = "0";
+    public static final String MOBILE_DETECTED_FAIL = "1";
+    public static final String IP_NOT_IN_RANGE = "4";
+    public static final String INVALID_CHARGE = "23";
+    public static final String NOT_ENOUGH_MONEY = "401";
+    public static final String REGISTERED = "408";
+    public static final String UNREGISTERED = "411";
+    public static final String INCHARGE_CYCLE = "414";
+
     public void redirect(HttpServletRequest request, HttpServletResponse response) throws Exception {
         buildParams(request, response);
     }
@@ -46,7 +55,7 @@ public abstract class MPSService {
     public static synchronized String getRequestID() {
         try {
             Thread.sleep(1);
-            return String.valueOf(System.currentTimeMillis());
+            return CP_CODE + StringUtil.format(new Date(), "yyMMddHHmmssSSS");
         } catch (InterruptedException ex) {
             return "";
         }

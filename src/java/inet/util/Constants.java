@@ -20,4 +20,11 @@ public class Constants {
     public static boolean isRunning = true;
 
     public static final String DATABASE = "topgame";
+    public static final String SERVICE_CODE = "LS";
+    public static final String SERVICE_NUMBER = "9029";
+
+    public static final String MESSAGE_REGISTER_SUCCESS = "";
+    public static final String MESSAGE_NOT_ENOUGH_MONEY = "";
+    public static final String MESSAGE_PASSWORD = "";
+
 }

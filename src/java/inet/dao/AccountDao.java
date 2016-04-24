@@ -63,7 +63,8 @@ public class AccountDao extends AbstractDAO {
         return results.isEmpty() ? null : results.get(0);
 
     }
-    public Account login(String mobile,String password) throws Exception {
+
+    public Account login(String mobile, String password) throws Exception {
 
         String sql = "select * from account where mobile = ? and upper(password) = upper(?)";
 

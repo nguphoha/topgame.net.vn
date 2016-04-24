@@ -4,10 +4,6 @@
  */
 package inet.controller;
 
-import inet.cache.CategoryCache;
-import inet.cache.GameCache;
-import inet.cache.SeoCache;
-import inet.cache.management.CacheFactory;
 import inet.common.log.Logger;
 import inet.constant.Constant;
 import inet.entities.Pagination;
@@ -31,15 +27,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class BaseController implements Serializable {
 
-    protected int currentPage = 1;
+    protected int curentPage = 1;
     protected List<Pagination> paginations;
     protected int pageSize = Constant.PAGE_SIZE;
     private static Logger console = new Logger("console");
     private static Logger error = new Logger("error");
     public boolean isMobile = false;
-    protected GameCache gameCache;
-    protected CategoryCache categoryCache;
-    protected SeoCache seoCache;
 
     static {
         error.setDebug(true);
@@ -48,9 +41,6 @@ public class BaseController implements Serializable {
 
     public BaseController() {
         isMobile = getUserAgentInfo().isMobilePhone;
-        gameCache = (GameCache)CacheFactory.getCache("game");
-        categoryCache = (CategoryCache)CacheFactory.getCache("category");
-        seoCache = (SeoCache)CacheFactory.getCache("seo");
     }
 
     private UserAgent getUserAgentInfo() {
@@ -58,23 +48,18 @@ public class BaseController implements Serializable {
     }
 
     public String routing() {
-        return isMobile ? "wap": "web"; 
+        return isMobile ? "wap" : "web";
     }
-    public void pagination(int dataSize){
-        pagination(dataSize,pageSize);
-    }
-    
-    public void pagination(int dataSize,int _pageSize) {
-        int pageSize = _pageSize;
-        // init paginations array
-        paginations = new ArrayList<Pagination>();
+
+    public void pagination(int dataSize) {
+
         int display = 5;
 
         // Calculate number of page
         int phanNguyen = dataSize / pageSize;
         int phanDu = dataSize % pageSize;
         int soTrang = phanNguyen;
-        if (phanDu > 0 && phanNguyen > 0) {
+        if (phanDu > 0) {
             soTrang += 1;
         }
 
@@ -83,18 +68,19 @@ public class BaseController implements Serializable {
         }
 
         int i = 1;
-        if (currentPage == 1 || currentPage == 2 || currentPage == 3) {
+        if (curentPage == 1 || curentPage == 2 || curentPage == 3) {
             i = 1;
         } else {
-            i = currentPage - 2;
-            display = currentPage + 2;
+            i = curentPage - 2;
+            display = curentPage + 2;
         }
 
         if (display > soTrang) {
             display = soTrang;
         }
 
-        
+        // init paginations array
+        paginations = new ArrayList<Pagination>();
 
         // add first page
         Pagination pagination = new Pagination();
@@ -102,28 +88,26 @@ public class BaseController implements Serializable {
         pagination.setValue(1);
         pagination.setRender(true);
 
-        if (currentPage > 1) {
+        if (curentPage > 1) {
             pagination.setDisable(false);
         } else {
             pagination.setDisable(true);
         }
-//        pagination.setStyle("btnIcon btnHome");
-        pagination.setStyle("number");
+        pagination.setStyle("SoTrang_number1");
         paginations.add(pagination);
 
         // add previous page
         pagination = new Pagination();
         pagination.setLabel("<");
-        pagination.setValue(currentPage - 1);
+        pagination.setValue(curentPage - 1);
         pagination.setRender(true);
 
-        if (currentPage > 1) {
+        if (curentPage > 1) {
             pagination.setDisable(false);
         } else {
             pagination.setDisable(true);
         }
-//        pagination.setStyle("btnIcon btnBack");
-        pagination.setStyle("number");
+        pagination.setStyle("SoTrang_number1");
         paginations.add(pagination);
 
         // add page items
@@ -133,11 +117,11 @@ public class BaseController implements Serializable {
             pagination.setRender(true);
             pagination.setValue(i);
             pagination.setLabel(String.valueOf(i));
-            if (i == currentPage) {
-                pagination.setStyle("active");
+            if (i == curentPage) {
+                pagination.setStyle("SoTrang_number");
                 pagination.setDisable(true);
             } else {
-                pagination.setStyle("number");
+                pagination.setStyle("SoTrang_number1");
                 pagination.setDisable(false);
             }
             paginations.add(pagination);
@@ -146,15 +130,15 @@ public class BaseController implements Serializable {
         // add next page
         pagination = new Pagination();
         pagination.setLabel(">");
-        pagination.setValue(currentPage + 1);
+        pagination.setValue(curentPage + 1);
         pagination.setRender(true);
 //
-        if (currentPage == soTrang || soTrang == 0) {
+        if (curentPage == soTrang || soTrang == 0) {
             pagination.setDisable(true);
         } else {
             pagination.setDisable(false);
         }
-        pagination.setStyle("number");
+        pagination.setStyle("SoTrang_number1");
         paginations.add(pagination);
 
         // add end page
@@ -163,12 +147,12 @@ public class BaseController implements Serializable {
         pagination.setValue(soTrang);
         pagination.setRender(true);
 
-        if (currentPage == soTrang || soTrang == 0) {
+        if (curentPage == soTrang || soTrang == 0) {
             pagination.setDisable(true);
         } else {
             pagination.setDisable(false);
         }
-        pagination.setStyle("number");
+        pagination.setStyle("SoTrang_number1");
         paginations.add(pagination);
     }
 
@@ -273,12 +257,12 @@ public class BaseController implements Serializable {
         return getExternalContext().getMimeType(filePath);
     }
 
-    public int getCurrentPage() {
-        return currentPage;
+    public int getCurentPage() {
+        return curentPage;
     }
 
-    public void setCurrentPage(int curentPage) {
-        this.currentPage = curentPage;
+    public void setCurentPage(int curentPage) {
+        this.curentPage = curentPage;
     }
 
     public List<Pagination> getPaginations() {
@@ -334,5 +318,13 @@ public class BaseController implements Serializable {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-    
+
+    public boolean isIsMobile() {
+        return isMobile;
+    }
+
+    public void setIsMobile(boolean isMobile) {
+        this.isMobile = isMobile;
+    }
+
 }

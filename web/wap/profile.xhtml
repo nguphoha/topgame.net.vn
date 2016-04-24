@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/wap/master.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content">
+        <div class="PageChitiet_bg">
+            <div class="PageChitiet_content">
+                <div class="Account_content_img">
+                    <img src="${resUri}/wap/resource/images/top-game-Avarta.jpg"/>
+                </div>
+                <div class="Account_content_text">
+                    <strong>Số điện thoại:</strong> #{profileController.profile.mobile}<br />
+                    <strong>Ngày đăng ký:</strong> <h:outputText value="#{profileController.profile.dateCreate}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText><br />
+                    <strong>Mật khẩu:</strong> #{profileController.profile.password}
+                </div>
+                <div class="both"></div>
+            </div>
+        </div>
+        <div class="GAMEHOT_bg">
+       	  <div class="GAMEHOT_title">
+            	CÁC GAME ĐÃ DOWLOAD
+            </div>
+            <div class="GAMEHOT_title_bg">
+            	<div class="GAMEHOT_title_bg_red"></div>
+            </div>
+            <div class="GameHOT">
+                <ul>
+                    <c:forEach var="item" items="#{profileController.games}">
+                    <li>
+                        <div class="GameHOT_box">
+                            <a href="#{realUri}/#{item.category.code}/#{item.url}"><img src="#{realUri}/#{item.avatar}"/></a>
+                            <div class="GameHOT_box_text">
+                                <a href="#{realUri}/#{item.url}">#{item.name}</a>
+                                <p><a href="#{realUri}/#{item.category.code}.html">#{item.category.name}</a></p>
+                            </div>
+                        </div>
+                    </li>
+                </c:forEach>
+                </ul>
+                <div class="both"></div>
+            </div>
+            <c:if test="#{not empty profileController.games}">
+            <div class="SoTrang">
+                <c:forEach var="item" items="#{profileController.paginations}">
+                    <a href="#{realUri}/trang-ca-nhan.html?page=#{item.value}" class="#{item.style}">#{item.label}</a>
+                </c:forEach>
+            </div>
+        </c:if>
+        </div>
+    </ui:define>
+</ui:composition>

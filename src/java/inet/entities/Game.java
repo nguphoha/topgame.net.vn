@@ -5,42 +5,44 @@
  */
 package inet.entities;
 
+import inet.cache.CategoryCache;
+import inet.cache.management.CacheFactory;
 import inet.common.database.annotation.Column;
 import inet.common.database.annotation.Table;
+import inet.dao.GameOSDao;
 import inet.util.StringUtil;
+import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Admin
  */
 @Table(name = "game")
-public class Game {
+public class Game implements Serializable{
 
     public static int ALL = -1;
     public static int INACTIVE = 0;
     public static int ACTIVE = 1;
-    
+
     public static String GAME_HOT = "GAME_HOT";
     public static String GAME_NEWEST = "GAME_NEWEST";
     public static String GAME_MOST_VIEW = "GAME_MOST_VIEW";
     public static String GAME_MOST_DOWNLOAD = "GAME_MOST_DOWNLOAD";
-    
+
     public static final int HOT = 1;
     public static final int NO_HOT = 0;
 
     @Column(name = "id", PK = true)
     String id;
-    
+
     @Column(name = "category_id")
     String categoryId;
 
     @Column(name = "name")
     String name;
-
-    @Column(name = "code")
-    String code;
 
     @Column(name = "author")
     String author;
@@ -74,12 +76,24 @@ public class Game {
 
     @Column(name = "hot")
     int hot;
-    
-    @Column(name = "download_url")
-    String downloadUrl;
-    
-    String categoryName;
-    String categoryCode;
+
+    Map<String, GameOS> os = new HashMap<String, GameOS>();
+    String url;
+
+    public Category getCategory() throws Exception {
+        CategoryCache categoryCache = (CategoryCache) CacheFactory.getCache("category");
+        return categoryCache.getById(Integer.parseInt(categoryId));
+    }
+
+    public String getUrl() {
+        if (url == null) {
+            return StringUtil
+                    .standardized(StringUtil.clearUnicode(name.toLowerCase()))
+                    .replace(" ", "-")
+                    .replaceAll("[+.^:,]","") + "-" + id + ".html";
+        }
+        return url;
+    }
 
     public String getId() {
         return id;
@@ -95,14 +109,6 @@ public class Game {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getAuthor() {
@@ -139,10 +145,6 @@ public class Game {
 
     public Timestamp getDateCreate() {
         return dateCreate;
-    }
-    
-    public String getDateCreateString() {
-        return dateCreate == null ?"" : StringUtil.format(new Date(dateCreate.getTime()), "dd/MM/yyyy hh:mm:ss aaa");
     }
 
     public void setDateCreate(Timestamp dateCreate) {
@@ -197,22 +199,6 @@ public class Game {
         this.hot = hot;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getCategoryCode() {
-        return categoryCode;
-    }
-
-    public void setCategoryCode(String categoryCode) {
-        this.categoryCode = categoryCode;
-    }
-
     public String getCategoryId() {
         return categoryId;
     }
@@ -221,17 +207,25 @@ public class Game {
         this.categoryId = categoryId;
     }
 
-    public String getDownloadUrl() {
-        return downloadUrl;
+    public Map<String, GameOS> getOs() {
+        return os;
     }
 
-    public void setDownloadUrl(String downloadUrl) {
-        this.downloadUrl = downloadUrl;
+    public void setOs(Map<String, GameOS> os) {
+        this.os = os;
     }
-    
-    @Override
-    public String toString() {
-        return "Game{" + "id=" + id + ", name=" + name + ", code=" + code + ", author=" + author + ", des=" + description + ", viewCount=" + viewCount + ", downloadCount=" + downloadCount + ", dateCreate=" + dateCreate + ", status=" + status + ", avatar=" + avatar + ", seoTitle=" + seoTitle + ", seoDescription=" + seoDescription + ", seoKeyword=" + seoKeyword + ", hot=" + hot + '}';
+
+    public GameOS getGameOS(String key) {
+        return os.get(key);
     }
-    
+
+    public void putGameOS(String key, GameOS gameOS) {
+        os.put(key, gameOS);
+    }
+
+    public void loadGameOS() throws Exception {
+        GameOSDao gameOSDao = new GameOSDao();
+        os = gameOSDao.getByGameID(id);
+    }
+
 }

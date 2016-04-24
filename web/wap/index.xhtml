@@ -1,74 +1,100 @@
-
-<ui:composition template="master-page-wap.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/wap/master.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:cc="http://xmlns.jcp.org/jsf/composite/topgame/component">
-    <ui:define name="content">        
-        <!--        Danh sách game HOT nhất-->
-        <c:if test="#{typeView eq 'hot-nhat' or empty typeView}">
-            <cc:games-wap games="#{homeController.gamesHOT}" 
-                          linkMore="${request.contextPath}/game-hot-nhat.html"
-                          title="GAME HOT NHẤT"
-                          paginations="#{homeController.paginations}"/>
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-        </c:if>
-        <!--        Danh sách game mới nhất-->
-        <c:if test="#{typeView eq 'moi-nhat'}">
-            <cc:games-wap games="#{homeController.gamesNewest}" 
-                          linkMore="${request.contextPath}/game-moi-nhat.html"
-                          title="GAME MỚI NHẤT"
-                          paginations="#{homeController.paginations}"/>
+    <ui:define name="content">
 
-        </c:if>
-        <c:if test="${empty typeView}">
-            <div class="GAMEMOINHAT_bg">
-                <div class="GAMEHOT_title">
-                    MỚI NHẤT
-                    <div class="GAMEHOT_title_xemtatca">
-                        <a href="${request.contextPath}/game-moi-nhat.html?action=view-more">Xem thêm</a>
-                    </div>
-                </div>
-                <div class="GAMEHOT_title_bg">
-                    <div class="GAMEHOT_title_bg_red"></div>
-                </div>
-                <div class="GAMEMOINHAT_list">
-                    <ul>
-                        <c:forEach var="game" items="#{homeController.gamesNewest}">
-                            <li>
-                                <div class="GAMEMOINHAT_box">
-                                    <center>
-                                        <img src="${request.contextPath}/resources/images/top-game-gamemoinhat-1.jpg"/>
-                                    </center>
-                                    <div class="GAMEMOINHAT_box_text">
-                                        <a href="#">#{game.name}</a>
-                                        <p><a href="#">#{game.categoryName}</a></p>	
-                                    </div>
+        <div class="GAMEHOT_bg">
+            <div class="GAMEHOT_title">
+                HOT
+            </div>
+            <div class="GAMEHOT_title_bg">
+                <div class="GAMEHOT_title_bg_red"></div>
+            </div>
+            <div class="GameHOT">
+                <ul>
+                    <c:forEach var="item" items="#{indexController.hotes}">
+                        <li>
+                            <div class="GameHOT_box">
+                                <a href="#{realUril}/#{item.category.code}/#{item.url}"><img  src="#{realUri}#{item.avatar}"/></a>
+                                <div class="GameHOT_box_text">
+                                    <a href="#{realUril}/#{item.category.code}/#{item.url}">#{item.name}</a>
+                                    <p><a href="#{realUril}/#{item.category.code}.html">#{item.category.name}</a></p>
                                 </div>
-                            </li>
-                        </c:forEach>
-
-                    </ul>
-                    <div class="both"></div>
+                            </div>
+                        </li>      
+                    </c:forEach>
+                </ul>
+                <div class="both"></div>
+            </div>
+            <div class="GameHOT_button">
+                <button class="GameHOT_button_form" onclick="window.location = '#{realUril}/game-hot-nhat.html'">
+                    XEM THÊM
+                </button>
+            </div>
+        </div>
+        <div class="GAMEMOINHAT_bg">
+            <div class="GAMEHOT_title">
+                MỚI NHẤT
+                <div class="GAMEHOT_title_xemtatca">
+                    <a href="#{realUri}/game-moi-nhat.html">Xem thêm</a>
                 </div>
             </div>
-        </c:if>
+            <div class="GAMEHOT_title_bg">
+                <div class="GAMEHOT_title_bg_red"></div>
+            </div>
+            <div class="GAMEMOINHAT_list">
+                <ul>
+                    <c:forEach var="item" items="#{indexController.newest}">
+                        <li>
+                            <div class="GAMEMOINHAT_box">
+                                <center>
+                                    <img src="#{realUri}#{item.avatar}"/>
+                                </center>
+                                <div class="GAMEMOINHAT_box_text">
+                                    <a href="#">#{item.name}</a>
+                                    <p><a href="#">#{item.category.name}</a></p>	
+                                </div>
+                            </div>
+                        </li>
 
-        <!--        Danh sách game xem nhiều nhất-->
-        <c:if test="#{typeView eq 'xem-nhieu' or empty typeView}">
-            <cc:games-wap games="#{homeController.gamesMostView}" 
-                          linkMore="${request.contextPath}/game-xem-nhieu.html"
-                          title="GAME XEM NHIỀU"
-                          paginations="#{homeController.paginations}"/>    
-        </c:if>
-
-        <!--        Danh sách game tải nhiều nhất-->
-        <c:if test="#{typeView eq 'tai-nhieu' or empty typeView}">
-            <cc:games-wap games="#{homeController.gamesMostDownload}" 
-                          linkMore="${request.contextPath}/game-tai-nhieu.html"
-                          title="GAME TẢI NHIỀU"
-                          paginations="#{homeController.paginations}"/>    
-        </c:if>
+                    </c:forEach>
+                </ul>
+                <div class="both"></div>
+            </div>
+        </div>
+        <div class="GAMEHOT_bg">
+            <div class="GAMEHOT_title">
+                XEM NHIỀU
+            </div>
+            <div class="GAMEHOT_title_bg">
+                <div class="GAMEHOT_title_bg_red"></div>
+            </div>
+            <div class="GameHOT">
+                <ul>
+                    <c:forEach var="item" items="#{indexController.viewest}">
+                        <li>
+                            <div class="GameHOT_box">
+                                <a href="#{realUril}/#{item.category.code}/#{item.url}"><img  src="#{realUri}#{item.avatar}"/></a>
+                                <div class="GameHOT_box_text">
+                                    <a href="#{realUril}/#{item.category.code}/#{item.url}">#{item.name}</a>
+                                    <p><a href="#{realUril}/#{item.category.code}.html">#{item.category.name}</a></p>
+                                </div>
+                            </div>
+                        </li>      
+                    </c:forEach>  
+                </ul>
+                <div class="both"></div>
+            </div>
+            <div class="GameHOT_button">
+                <button class="GameHOT_button_form"  onclick="window.location = '#{realUril}/game-xem-nhieu-nhat.html'">
+                    XEM THÊM
+                </button>
+            </div>
+        </div>        
     </ui:define>
+
 </ui:composition>

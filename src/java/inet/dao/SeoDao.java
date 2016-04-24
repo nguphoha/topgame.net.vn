@@ -32,11 +32,13 @@ public class SeoDao extends AbstractDAO {
             @Override
             public Seo map(ResultSet rs) throws SQLException {
                 seo = new Seo();
+                seo.setName(rs.getString("name"));
                 seo.setDescription(rs.getString("description"));
                 seo.setKeyword(rs.getString("keyword"));
                 seo.setTitle(rs.getString("title"));
-                seo.setPageDescription(rs.getString("page_description"));
-                seo.setImage(rs.getString("image"));
+                seo.setUrl(rs.getString("url"));
+               // seo.setPageDescription(rs.getString("page_description"));
+                //seo.setImage(rs.getString("image"));
                 return seo;
             }
         };

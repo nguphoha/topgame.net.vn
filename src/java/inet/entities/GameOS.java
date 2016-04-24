@@ -7,6 +7,7 @@ package inet.entities;
 
 import inet.common.database.annotation.Column;
 import inet.common.database.annotation.Table;
+import java.sql.Timestamp;
 
 /**
  *
@@ -29,6 +30,9 @@ public class GameOS {
 
     @Column(name = "status")
     String status;
+
+    @Column(name = "date_create")
+    Timestamp dateCreate;
 
     public String getOsId() {
         return osId;
@@ -60,6 +64,22 @@ public class GameOS {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Timestamp getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(Timestamp dateCreate) {
+        this.dateCreate = dateCreate;
     }
 
 }

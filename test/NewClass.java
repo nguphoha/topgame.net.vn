@@ -28,18 +28,6 @@ public class NewClass {
 //           } else {
 //               System.out.println("success");
 //           }
-        GameDAO dao = GameDAO.getInstance();
-//        List<Game> categories = dao.findByName("","ios");
-//        for(Game game : categories){  
-//            System.out.println("=="+game.getId() +"|name "+game.getName()+"|category " + game.getCategoryName() );
-//        }
-        Game game = dao.findById(8);
-        System.out.println("==desc "+game.getDescription());
-//        System.out.println("===============Next");
-//        categories = dao.findGameHot(0,2,6);
-//        for(Game game : categories){  
-//            System.out.println("=="+game.getId() +"|name "+game.getName()+"|category" + game.getCategoryName());
-//        }
-        //System.out.println("=====count "+dao.countGameByCategory(1, "android"));
+        
     }
 }

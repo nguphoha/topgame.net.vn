@@ -275,13 +275,9 @@ public class UserAgent {
         if ((this.initCompleted == true) || (this.isIphone == true)) {
             return this.isIphone;
         }
-
         // The iPad and iPod touch say they're an iPhone! So let's disambiguate.
-        if (userAgent.indexOf(deviceIphone) != -1 && !detectIpad()
-                && !detectIpod()) {
-            return true;
-        }
-        return false;
+        
+        return userAgent.contains(deviceIphone) && !detectIpad() && !detectIpod();
     }
 
     /**
