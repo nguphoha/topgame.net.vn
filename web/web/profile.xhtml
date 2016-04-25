@@ -11,7 +11,10 @@
             </div>
             <div class="Accont_text">
                 <strong>Số điện thoại:</strong> #{profileController.profile.mobile}<br />
-                <strong>Ngày đăng ký:</strong> <h:outputText value="#{profileController.profile.dateCreate}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText><br />
+                <strong>Ngày đăng ký:</strong> <h:outputText value="#{profileController.service.dateCreate}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText><br />
+                <strong>Kênh đăng ký:</strong> #{profileController.service.channel}<br />
+                <strong>Ngày hết hạn:</strong> <h:outputText value="#{profileController.service.dateExpire}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText><br />
+                <strong>Ngày hủy:</strong>  <h:outputText value="#{profileController.service.dateCancel}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText><br />
                 <strong>Mật khẩu:</strong> #{profileController.profile.password}
             </div>
             <div class="both"></div>

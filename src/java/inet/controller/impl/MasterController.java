@@ -14,10 +14,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import net.sf.uadetector.ReadableUserAgent;
-import net.sf.uadetector.UserAgentStringParser;
-import net.sf.uadetector.service.UADetectorServiceFactory;
-
 /**
  *
  * @author Admin
@@ -31,11 +27,9 @@ public class MasterController extends BaseController {
     String categoryCode;
     String gameName;
 
-    public MasterController() {
-
-        UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
-        ReadableUserAgent agent = parser.parse(getRequest().getHeader("User-Agent"));
-
+    public MasterController() {    
+        
+        
         try {
             CategoryCache categoryCache = (CategoryCache) CacheFactory.getCache("category");
             categories = categoryCache.getAll();

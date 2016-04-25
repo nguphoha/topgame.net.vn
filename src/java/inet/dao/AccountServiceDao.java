@@ -42,7 +42,7 @@ public class AccountServiceDao extends AbstractDAO {
                 service.setDateLatestCreate(rs.getTimestamp("date_latest_create"));
                 service.setDateCancel(rs.getTimestamp("date_cancel"));
                 service.setDateRenew(rs.getTimestamp("date_renew"));
-                service.setDateRenew(rs.getTimestamp("date_expire"));
+                service.setDateExpire(rs.getTimestamp("date_expire"));
                 service.setPartner(rs.getString("partner"));
                 service.setUrlRegister(rs.getString("url_register"));
                 service.setStatus(rs.getString("status"));

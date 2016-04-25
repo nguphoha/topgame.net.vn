@@ -9,12 +9,11 @@ import inet.cache.GameCache;
 import inet.cache.management.CacheFactory;
 import inet.controller.BaseController;
 import inet.entities.Account;
+import inet.entities.AccountService;
 import inet.entities.Game;
 import inet.util.Constants;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -28,6 +27,8 @@ public class ProfileController  extends BaseController {
 
     private Account profile;
     
+    private AccountService service;
+    
     private List<Game> games;
     /**
      * Creates a new instance of ProfileController
@@ -35,6 +36,7 @@ public class ProfileController  extends BaseController {
     public ProfileController() {
         super();
         profile = (Account) getSessionValue(Constants.ACCOUNT);
+        
         if(profile == null){
             try {
                 redirect(getRealUri());
@@ -42,6 +44,7 @@ public class ProfileController  extends BaseController {
                 logToError(ex);
             }
         }
+        service = profile.getService(Constants.SERVICE_CODE);
         try {
             curentPage = Integer.parseInt(getParameter("page", "1"));
             GameCache cache = (GameCache)CacheFactory.getCache("game");
@@ -68,7 +71,15 @@ public class ProfileController  extends BaseController {
     public void setGames(List<Game> games) {
         this.games = games;
     }
-    
-    
+
+    public AccountService getService() {
+        return service;
+    }
+
+    public void setService(AccountService service) {
+        this.service = service;
+    }
+
+   
     
 }

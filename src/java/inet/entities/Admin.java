@@ -7,7 +7,14 @@ package inet.entities;
 
 import inet.common.database.annotation.Column;
 import inet.common.database.annotation.Table;
+import inet.dao.AdminDao;
+import inet.util.Constants;
+import inet.util.StringUtil;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -40,6 +47,68 @@ public class Admin {
     @Column(name = "date_create")
     Timestamp dateCreate;
 
+    private List<Module> modules = new ArrayList<Module>();
+    private Map<String, Module> mModules = new HashMap<String, Module>();
+    private List<Module> modulesTree;
+    
+    public void insert() throws Exception {
+        this.username = username.trim();
+        this.password = password.trim();
+        AdminDao adminDao = new AdminDao();
+        String id = adminDao.getSequenceValue("admin", Constants.DATABASE);
+        this.id = id;
+        adminDao.insert(this);
+    }
+
+    public void update() throws Exception {
+        AdminDao adminDao = new AdminDao();
+        adminDao.update(this);
+    }
+
+    public List<Module> getModuleTree() {
+        List<Module> parents = getRoots(modules);
+        for (Module item : parents) {
+            getChild(item, modules);
+        }
+        return parents;
+    }
+
+    private List<Module> getRoots(List<Module> modules) {
+        List<Module> parents = new ArrayList<Module>();
+        for (Module item : modules) {
+            if (StringUtil.nvl(item.getParentId(), "").equals("")) {
+                parents.add(item);
+            }
+        }
+        return parents;
+    }
+
+    private void getChild(Module parent, List<Module> datas) {
+        for (Module item : datas) {
+            if (!StringUtil.nvl(item.getParentId(), "").equals("") && item.getParentId().equals(parent.getId())) {
+                item.setParent(parent);
+                getChild(item, datas);
+                parent.addChild(item);
+            }
+        }
+    }
+
+    public List<Module> getModulesTree() {
+        if (modulesTree == null) {
+            modulesTree = getModuleTree();
+        }
+        return modulesTree;
+    }
+
+    public void setModulesTree(List<Module> modulesTree) {
+        this.modulesTree = modulesTree;
+    }
+    
+    @Override
+    public Admin clone() throws CloneNotSupportedException {
+        return (Admin) super.clone();
+    }
+    
     public String getId() {
         return id;
     }
@@ -104,4 +173,23 @@ public class Admin {
         this.dateCreate = dateCreate;
     }
 
+    public List<Module> getModules() {
+        return modules;
+    }
+
+    public void setModules(List<Module> modules) {
+        this.modules = modules;
+    }
+    public Module getModule(String url) {
+        return mModules.get(url);
+    }
+    public Map<String, Module> getmModules() {
+        return mModules;
+    }
+
+    public void setmModules(Map<String, Module> mModules) {
+        this.mModules = mModules;
+    }
+
+    
 }

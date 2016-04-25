@@ -32,7 +32,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     
-    <filter>
+<!--    <filter>
         <filter-name>MultipathRequestFilter</filter-name>
         <filter-class>inet.common.jsf.request.FileUploadFilter</filter-class>
     </filter>
@@ -41,7 +41,7 @@
         <servlet-name>Faces Servlet</servlet-name>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
+    </filter-mapping>-->
     
     <filter>
         <filter-name>Pretty Filter</filter-name>
@@ -124,7 +124,18 @@
         <url-pattern>*.png</url-pattern>
         <url-pattern>*.jpg</url-pattern>
     </filter-mapping>
-    
+    <filter>
+        <filter-name>Permission Filter</filter-name>
+        <filter-class>inet.filter.PermissionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Permission Filter</filter-name>
+        <url-pattern>/cms/module/*</url-pattern>
+        <url-pattern>/cms/admin/*</url-pattern>
+        <url-pattern>/cms/game/*</url-pattern>
+        <url-pattern>/cms/index.xhtml</url-pattern>
+        <url-pattern>/cms/password.xhtml</url-pattern>
+    </filter-mapping> 
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="#{realUri}/resource/css/style.css"/>
+        <script type="text/javascript" src="#{realUri}/resource/js/common.js"/>
+    </h:head>
+    <h:body>
+        <p:growl id="messages"/>        
+        <p:dialog header="Đăng nhập hệ thống" widgetVar="dlgDialog" resizable="false" closable="false" >
+            <p:outputPanel id="pnLogin">
+                <h:form id="frmLogn" prependId="false">
+                    <h:panelGrid columns="1" style="text-align: center" width="300" cellpadding="5" >
+                        <p:inputText id="txtUsername" placeholder="Username" style="width: 200px;" value="#{loginController.username}"/>
+                        <p:password id="txtPassword" placeholder="Password" style="width: 200px;" value="#{loginController.password}"/>
+                        <p:commandButton value="Đăng nhập" update=":messages" actionListener="#{loginController.login()}"/>
+                    </h:panelGrid>
+                </h:form>
+            </p:outputPanel>
+        </p:dialog>
+
+        <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">
+            <f:facet name="start">
+                <img src="${contextPath}/cms/resource/images/loading.gif" />
+            </f:facet>
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>        
+        <script>
+            $(document).ready(function () {
+                PF('dlgDialog').show();
+            });
+        </script>
+    </h:body>
+</html>
+

@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/cms/master.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <fieldset id="filter">
+            <legend>Filter</legend>
+            <h:form id="filter">
+                <h:panelGrid id="pngFilter" columns="5" cellspacing="3">
+                    <p:inputText value="#{adminContronller.username}" placeholder="Username"/>
+                    <p:selectOneMenu value="#{adminContronller.status}" style="width: 154px;">
+                        <f:selectItem itemValue="" itemLabel="All Status"/>
+                        <f:selectItem itemValue="1" itemLabel="Active"/>
+                        <f:selectItem itemValue="0" itemLabel="Inactive"/>
+                    </p:selectOneMenu>
+                    <p:commandButton value="Search" update=":frmDatas:tblDatas" actionListener="#{adminContronller.search()}"/>
+                    <p:commandButton value="Add new" ajax="false" type="button" onclick="PF('dlgAddNew').show()"/>
+                </h:panelGrid>
+
+            </h:form>
+        </fieldset>
+
+        <fieldset id="filter" class="datas">
+            <legend>Table Datas</legend>
+            <h:form id="frmDatas" prependId="false">
+                <p:dataTable id="tblDatas" var="item" value="#{adminContronller.datas}" rows="20" rowIndexVar="index" 
+                             paginator="true" paginatorPosition="bottom" lazy="true" rowsPerPageTemplate="10,20,30,40,50,100">
+
+                    <p:column headerText="#" width="5" style="text-align: right;">
+                        <h:outputText value="#{index + 1}"/>
+                    </p:column>
+
+                    <p:column headerText="ID" width="70">
+                        <h:outputText value="#{item.id}" />
+                    </p:column>
+
+                    <p:column headerText="Username" width="70">
+                        <h:outputText value="#{item.username}" />
+                    </p:column>
+
+                    <p:column headerText="Password" width="82">
+                        <h:outputText value="#{item.password}" />
+                    </p:column>
+
+
+                    <p:column headerText="Created Date" width="60">
+                        <h:outputText value="#{item.createdDate}">
+                            <f:convertDateTime pattern="dd/MM/yyy HH:mm:ss"/>
+                        </h:outputText>
+                    </p:column>
+
+
+                    <p:column headerText="Status" width="70" style="text-align: center;">
+                        <h:outputText value="Inactive" rendered="#{item.status == 0}"/>
+                        <h:outputText value="Active" rendered="#{item.status == 1}"/>
+                    </p:column>
+
+                    <p:column width="40">
+                        <p:commandButton icon="ui-icon-search" title="View" update=":frmDatas:pngUpdateMenu" oncomplete="PF('dlgUpdateMenu').show()">
+                            <f:setPropertyActionListener value="#{item}" target="#{adminContronller.selectedAdmin}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>         
+                <ui:include src="addnew.xhtml"/>
+                <ui:include src="update.xhtml"/>
+            </h:form>
+        </fieldset>
+    </ui:define>
+</ui:composition>

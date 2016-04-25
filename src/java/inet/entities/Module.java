@@ -7,7 +7,11 @@ package inet.entities;
 
 import inet.common.database.annotation.Column;
 import inet.common.database.annotation.Table;
+import inet.dao.ModuleDao;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import inet.util.Constants;
 
 /**
  *
@@ -37,6 +41,26 @@ public class Module {
     @Column(name = "priority")
     private String priority;
 
+    private Module parent;
+    private List<Module> children = new ArrayList<Module>();
+    
+    public void insert() throws Exception {
+        ModuleDao moduleDao = new ModuleDao();
+        String id = moduleDao.getSequenceValue("modules", Constants.DATABASE);
+        this.id = id;
+        moduleDao.insert(this);
+    }
+
+    public void update() throws Exception {
+        ModuleDao moduleDao = new ModuleDao();
+        moduleDao.update(this);
+    }
+    
+    public void addChild(Module child) {
+        children.add(child);
+    }
+    
+    //getters and setters
     public String getId() {
         return id;
     }
@@ -93,4 +117,20 @@ public class Module {
         this.priority = priority;
     }
 
+    public Module getParent() {
+        return parent;
+    }
+
+    public void setParent(Module parent) {
+        this.parent = parent;
+    }
+
+    public List<Module> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Module> children) {
+        this.children = children;
+    }
+    
 }

@@ -14,6 +14,8 @@ import inet.entities.Account;
 import inet.entities.AccountLog;
 import inet.entities.AccountService;
 import inet.entities.Service;
+import inet.service.client.MTListenerServiceImpl;
+import inet.service.client.MTListenerServiceImplService;
 import inet.util.Constants;
 import inet.util.StringUtil;
 import inet.util.TimestampUtil;
@@ -35,7 +37,7 @@ import javax.servlet.annotation.WebServlet;
 public class MPSResponseServlet extends HttpServlet {
 
     Logger logger = new Logger("charge");
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -172,7 +174,7 @@ public class MPSResponseServlet extends HttpServlet {
             accountLog.insert();
 
             sendMT(Constants.MESSAGE_REGISTER_SUCCESS, mobile, Constants.SERVICE_NUMBER);
-            sendMT(Constants.MESSAGE_PASSWORD, mobile, Constants.SERVICE_NUMBER);
+            sendMT(String.format(Constants.MESSAGE_PASSWORD, account.getPassword()), mobile, Constants.SERVICE_NUMBER);
 
         }
 
@@ -215,8 +217,10 @@ public class MPSResponseServlet extends HttpServlet {
         response.sendRedirect("http://topgame.net.vn");
     }
 
-    public void sendMT(String message, String mobile, String serviceNumber) throws Exception {
-
+    private static String sendMT(String content, String source, String dest) {
+        MTListenerServiceImplService service = new MTListenerServiceImplService();
+        MTListenerServiceImpl port = service.getMTListenerServiceImplPort();
+        return port.mtRequest("admin", "admin", source, dest, content);
     }
 
 }

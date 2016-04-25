@@ -1,0 +1,44 @@
+body{
+    font-size: 12px;    
+    margin: 2px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+#container{
+    max-width: 1024px;
+    margin: 0px auto;
+}
+
+#mainContent{
+    width: 100%;    
+}
+
+fieldset{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background: #F0F7F7;
+    border: 1px solid #D5EDED;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #4f4f4f;
+
+}
+
+legend{
+    font-weight: bold;
+}
+
+fieldset form{
+    border: none;
+    font-size: 11px;
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield{
+    -webkit-box-shadow:none;
+    box-shadow:none;
+}
+
+#treeMenus .ui-widget-content{
+    border: none;
+    background: none;
+}

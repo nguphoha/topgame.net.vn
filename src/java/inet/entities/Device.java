@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author TOM
  */
-public class Device implements Serializable {
+public class Device implements Serializable, Cloneable {
 
     String id;
     String manufacturer;
@@ -75,6 +75,11 @@ public class Device implements Serializable {
 
     public void setCldc(String cldc) {
         this.cldc = cldc;
+    }
+
+    @Override
+    public Device clone() throws CloneNotSupportedException {
+        return (Device) super.clone();
     }
 
 }

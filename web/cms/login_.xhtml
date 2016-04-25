@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:pass="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>Login page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <link href="${realUri}/web/resource/css/style.css" rel="stylesheet" type="text/css" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=vietnamese,latin,latin-ext' rel='stylesheet' type='text/css'/>
+        <link rel="stylesheet" type="text/css" href="${request.contextPath}/cms/resource/css/login.css"></link>
+    </h:head>
+    <h:body>
+        <center>
+            <div class="page">
+                
+                <h:form  id="frmLogin"  prependId="false">
+                    <div class="content-box corner">
+                        <div class="title">ĐĂNG NHẬP</div>
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" showSummary="false"/>
+                        <div class="content-input">
+                            <h:inputText styleClass="inputForm" id="txtUsername" value="#{cmsLoginController.username}"
+                                         required="true" requiredMessage="Vui lòng nhâp username!"/>
+                        </div>
+                        <div class="content-input">
+                            <h:inputSecret id="txtPassword" class="inputForm" value="#{cmsLoginController.password}"
+                                           required="true" requiredMessage="Vui lòng nhập password!"
+                                           pass:placeholder="Password"/>
+                        </div>
+                        
+
+                        <div class="both"></div>
+                        <div class="bt1">
+                            <h:commandButton value="Đăng nhập" style="cursor: pointer;" action="#{cmsLoginController.login()}"  
+                                             styleClass="button1 corner">
+                                <f:param value="login" name="click"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </center>
+    </h:body>
+</html>
+

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <c:set var="contextPath" value="#{request.contextPath}"/>
+    <c:set var="realUri" value="#{masterController.realUri}"/>
+    <c:set var="resUri" value="${realUri}/cms/resource"/>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <link href="${realUri}/cms/resource/css/style.css" rel="stylesheet" type="text/css" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=vietnamese,latin,latin-ext' rel='stylesheet' type='text/css'/>
+
+    </h:head>
+    <h:body>
+        <div id="container">
+            <h:graphicImage url="${realUri}/cms/resource/images/top-game-logo.png"/>
+            <br/>   
+
+            <div id="mainNav">
+                <h:form id="frmMainNav">  
+                    <p:growl id="messages"/>
+                    <p:menubar model="#{menuController.model}">                     
+                        <f:facet name="options">
+                            <p:menuButton value="Chào   #{sessionScope.ADMIN.name}" iconPos="ui-icon-person">
+                                <p:menuitem value="Mật khẩu" icon="ui-icon-arrowrefresh-1-w" url="/password.xhtml"/>
+                                <p:menuitem value="Thoát" icon="ui-icon-power"  ajax="true" actionListener="#{loginController.logout()}"/>
+                                <p:separator />
+                                <p:menuitem value="Homepage" url="${request.contextPath}/trang-chu.html" icon="ui-icon-home"/>
+                            </p:menuButton>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </div>
+
+            <div id="mainContent">
+                <ui:insert name="content"/>
+            </div>
+
+        </div>
+        <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">
+            <f:facet name="start">
+                <img src="${realUri}/cms/resource/images/loading.gif" />
+            </f:facet>
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
+    </h:body>
+</html>
+

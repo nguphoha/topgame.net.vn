@@ -184,6 +184,10 @@ public class BaseController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
     }
 
+    public String getUserAgent() {
+        return getRequest().getHeader("user-agent");
+    }
+
     public String getParameter(String key) {
         return StringUtil.nvl(getExternalContext().getRequestParameterMap().get(key), "");
     }
